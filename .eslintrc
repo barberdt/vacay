@@ -1,0 +1,49 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "bindaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "generators": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true,
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "complexity": [1, 8],
+    "curly": 2,
+    "eol-last": 0,
+    "eqeqeq": 2,
+    "quotes": [2, "single"],
+    "react/jsx-no-undef": 2,
+    "react/jsx-quotes": [2, "double"],
+    "react/jsx-sort-prop-types": 2,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 2,
+    "react/no-unknown-property": 1,
+    "react/prop-types": 2,
+    "react/self-closing-comp": 2,
+    "react/sort-comp": 2,
+    "react/wrap-multilines": 2,
+    "space-after-keywords": 1,
+    "strict": 0
+  }
+}

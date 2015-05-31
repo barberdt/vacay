@@ -4,7 +4,7 @@ console.log('Welcome to Vacay. Plan a trip!');
 
 const MyClass = React.createClass({
   render() {
-    return <div>My Class!</div>;
+    return <div>A React class.</div>;
   }
 });
 
