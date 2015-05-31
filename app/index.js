@@ -1,13 +1,36 @@
 const React = require('react/addons');
+const Router = require('react-router');
+
+const Route = Router.Route;
+const RouteHandler = Router.RouteHandler;
 
 console.log('Welcome to Vacay. Plan a trip!');
 
-const MyClass = React.createClass({
+const App = React.createClass({
   render() {
-    return <div>A React class.</div>;
+    return (
+      <div className="Vacay">
+        Vacay
+        <RouteHandler />
+      </div>
+    );
   }
 });
 
+const Test = React.createClass({
+  render() {
+    return <div>This is a test</div>;
+  }
+});
+
+const routes = (
+  <Route handler={App}>
+    <Route path="/test" handler={Test} />
+  </Route>
+);
+
 document.addEventListener('DOMContentLoaded', () => {
-  React.render(React.createElement(MyClass), document.getElementById('container'));
+  Router.run(routes, Router.HistoryLocation, (Root) => {
+    React.render(<Root />, document.body);
+  });
 });
