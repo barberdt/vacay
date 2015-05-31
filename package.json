@@ -1,0 +1,12 @@
+{
+  "name": "vacay",
+  "description": "A trip planning application.",
+  "version": "0.0.1",
+  "author": "barberdt",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.10"
+  }
+}
