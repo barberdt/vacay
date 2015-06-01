@@ -1,6 +1,7 @@
 from .. import api
+from flask import jsonify
 from vacay import mongo
 
 @api.route('/trips', methods=['GET'])
 def get_trips():
-  return mongo.db.trips.find_one().get('name')
+  return jsonify(foo='bar')

@@ -7,11 +7,19 @@ class TripActions {
 
     TripAPI.loadTrips()
       .then(() => {
-        console.log('Trip loading success.');
+        this.actions.loadTripsSuccess();
       })
       .catch(() => {
-        console.log('Trip loading failure.');
+        this.actions.loadTripsFailure();
       });
+  }
+
+  loadTripsSuccess() {
+    this.dispatch();
+  }
+
+  loadTripsFailure() {
+    this.dispatch();
   }
 }
 

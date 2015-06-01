@@ -13,6 +13,15 @@ class TripStore {
   onLoadTrips() {
     this.loading = true;
   }
+
+  onLoadTripsSuccess() {
+    this.loading = false;
+    this.loaded = true;
+  }
+
+  onLoadTripsFailure() {
+    this.loading = false;
+  }
 }
 
 module.exports = alt.createStore(TripStore);
