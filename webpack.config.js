@@ -6,7 +6,11 @@ module.exports = {
     filename: 'vacay.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: [
+      'node_modules',
+      'shared'
+    ],
   },
   devtool: '#eval',
   module: {
