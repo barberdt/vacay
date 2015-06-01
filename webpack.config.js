@@ -1,5 +1,5 @@
 module.exports = {
-  context: __dirname + '/app',
+  context: __dirname + '/src',
   entry: './entry',
   output: {
     path: __dirname + '/vacay/static/js',

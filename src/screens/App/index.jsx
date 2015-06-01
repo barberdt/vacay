@@ -3,7 +3,7 @@ const Router = require('react-router');
 
 const RouteHandler = Router.RouteHandler;
 
-const App = React.createClass({
+const Root = React.createClass({
   render() {
     return (
       <div className="Vacay">
@@ -15,4 +15,4 @@ const App = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = Root;
