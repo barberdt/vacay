@@ -5,6 +5,9 @@ module.exports = {
     path: __dirname + '/vacay/static/js',
     filename: 'vacay.js'
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   devtool: '#eval',
   module: {
     preLoaders: [

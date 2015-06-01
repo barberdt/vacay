@@ -1,21 +1,10 @@
+const App = require('./App');
 const React = require('react/addons');
 const Router = require('react-router');
 
 const Route = Router.Route;
-const RouteHandler = Router.RouteHandler;
 
-console.log('Welcome to Vacay. Plan a trip!');
-
-const App = React.createClass({
-  render() {
-    return (
-      <div className="Vacay">
-        Vacay
-        <RouteHandler />
-      </div>
-    );
-  }
-});
+console.log('This is Vacay. Plan a trip!');
 
 const Test = React.createClass({
   render() {
