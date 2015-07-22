@@ -18,9 +18,11 @@ class TripActions {
     return TripAPI.loadTrips()
       .then(() => {
         this.actions.loadTripsSuccess();
+        return Promise.resolve();
       })
       .catch(() => {
         this.actions.loadTripsFailure();
+        return Promise.reject();
       });
   }
 
