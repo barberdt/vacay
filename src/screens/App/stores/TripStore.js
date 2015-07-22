@@ -4,6 +4,7 @@ const alt = require('dispatchers/alt');
 const immutableStore = require('alt/utils/ImmutableUtil');
 const TripActions = require('../actions/TripActions');
 
+
 class TripStore {
   constructor() {
     this.state = Map({

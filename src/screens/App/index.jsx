@@ -1,7 +1,9 @@
 const React = require('react/addons');
 const Router = require('react-router');
+
 const TripActions = require('./actions/TripActions');
 const TripStore = require('./stores/TripStore');
+
 
 const RouteHandler = Router.RouteHandler;
 

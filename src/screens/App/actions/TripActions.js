@@ -1,6 +1,7 @@
 const alt = require('dispatchers/alt');
 const TripAPI = require('../api/TripAPI');
 
+
 class TripActions {
   loadTrips() {
     this.dispatch();

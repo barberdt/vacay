@@ -1,8 +1,10 @@
-const App = require('./screens/App');
-const OtherTest = require('./screens/App/screens/OtherTest');
 const React = require('react/addons');
 const Router = require('react-router');
+
+const App = require('./screens/App');
+const OtherTest = require('./screens/App/screens/OtherTest');
 const Test = require('./screens/App/screens/Test');
+
 
 const Route = Router.Route;
 
