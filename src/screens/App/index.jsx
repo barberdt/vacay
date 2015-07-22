@@ -1,45 +1,22 @@
-const React = require('react/addons');
-const Router = require('react-router');
+const connectToStores = require('alt/utils/connectToStores');
+const RootActions = require('./actions/RootActions');
+const RootStore = require('./stores/RootStore');
 
-const TripActions = require('./actions/TripActions');
-const TripStore = require('./stores/TripStore');
+const Root = require('./components/Root');
 
 
-const RouteHandler = Router.RouteHandler;
-
-const Root = React.createClass({
-  getInitialState() {
-    return TripStore.getState();
+const connectedRoot = connectToStores({
+  getStores() {
+    return [RootStore];
   },
 
-  componentWillMount() {
-    TripStore.listen(() => {
-      this.setState(TripStore.getState());
-    });
-
-    if (!TripStore.getState().loaded) {
-      TripActions.loadTrips();
-    }
+  getPropsFromStores() {
+    return RootStore.getState().toObject();
   },
 
-  render() {
-    let loadingMessage;
-
-    if (this.state.loading) {
-      loadingMessage = 'Currently loading';
-    } else {
-      loadingMessage = 'Not currently loading';
-    }
-
-    return (
-      <div className="Vacay">
-        <h1>Vacay</h1>
-        <h2>Plan a trip!</h2>
-        {loadingMessage}
-        <RouteHandler />
-      </div>
-    );
+  componentDidConnect() {
+    RootActions.reset();
   }
-});
+}, Root);
 
-module.exports = Root;
+module.exports = connectedRoot;
