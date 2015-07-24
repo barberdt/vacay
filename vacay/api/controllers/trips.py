@@ -4,4 +4,3 @@ from vacay import mongo
 
 @api.route('/trips', methods=['GET'])
 def get_trips():
-  return jsonify(foo='bar')
