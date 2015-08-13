@@ -1,9 +1,12 @@
 from .. import api
+from flask import jsonify
 from vacay import mongo
 
 @api.route('/users', methods=['GET'])
 def get_users():
-    return mongo.db.users.find_one().get('name')
+    users = mongo.db.users.find()
+    results = [user for user in users]
+    return jsonify({'results': results})
 
 @api.route('/users', methods=['POST'])
 def create_user():
