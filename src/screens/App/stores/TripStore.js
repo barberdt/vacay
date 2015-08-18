@@ -21,8 +21,10 @@ class TripStore {
   /**
    * Handler for TripActions.loadTripsSuccess. Put the store in a non-loading
    * state.
+   *
+   * @param {Array} trips - The loaded trips.
    */
-  onLoadTripsSuccess() {
+  onLoadTripsSuccess(trips) {
     this.setState(this.state.merge({
       foo: 'bar'
     }));

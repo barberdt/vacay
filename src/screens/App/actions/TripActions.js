@@ -16,28 +16,33 @@ class TripActions {
     this.dispatch();
 
     return TripAPI.loadTrips()
-      .then(() => {
-        this.actions.loadTripsSuccess();
+      .then((resp) => {
+        this.actions.loadTripsSuccess(resp.data.results);
         return Promise.resolve();
       })
-      .catch(() => {
-        this.actions.loadTripsFailure();
+      .catch((resp) => {
+        this.actions.loadTripsFailure(resp.message);
         return Promise.reject();
       });
   }
 
   /**
-   * Invoked after a successful load. Void dispatch.
+   * Invoked after a successful load. Dispatches the loaded trips.
+   *
+   * @param {Array} trips - The loaded trips.
+   *
    */
-  loadTripsSuccess() {
-    this.dispatch();
+  loadTripsSuccess(trips) {
+    this.dispatch(trips);
   }
 
   /**
-   * Invoked after a failed load. Void dispatch.
+   * Invoked after a failed load. Dispatches the error message.
+   *
+   * @param {String} message - The error message.
    */
-  loadTripsFailure() {
-    this.dispatch();
+  loadTripsFailure(message) {
+    this.dispatch(message);
   }
 }
 
