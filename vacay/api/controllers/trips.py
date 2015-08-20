@@ -5,11 +5,11 @@ from flask import jsonify
 from vacay import db
 
 @api.route('/trips', methods=['GET'])
-def get_all():
+def get_trips():
     return jsonify({'results': [trip for trip in db.Trip.find()]})
 
 @api.route('/trips/<string:id>', methods=['GET'])
-def get_one(id):
+def get_trip(id):
     try:
         trip = db.Trip.find_one({'_id': ObjectId(id)})
     except InvalidId:
@@ -20,7 +20,7 @@ def get_one(id):
     if not trip:
         body = {
             'status': 404,
-            'message': 'Could not find trip with id %s', % id
+            'message': 'Could not find trip with id %s' % id
         }
         response = jsonify(body)
         response.status_code = 404
@@ -29,7 +29,7 @@ def get_one(id):
         return jsonify(trip)
 
 @api.route('/trips', methods=['POST'])
-def create_one():
+def create_trip():
     new_trip = db.Trip()
     new_trip.update(request.json)
     new_trip.save()

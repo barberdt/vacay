@@ -3,14 +3,13 @@ from bson.errors import InvalidId
 from bson.objectid import ObjectId
 from flask import jsonify, request
 from vacay import db
-from vacay import app
 
 @api.route('/users', methods=['GET'])
-def get_all():
+def get_users():
     return jsonify({'results': [user for user in db.User.find()]})
 
 @api.route('/users/<string:id>', methods=['GET'])
-def get_one(id):
+def get_user(id):
     try :
         user = db.User.find_one({'_id': ObjectId(id)})
     except InvalidId:
@@ -20,7 +19,7 @@ def get_one(id):
 
     if not user:
         body = {
-            'status': 400,
+            'status': 404,
             'message': 'Could not find user with id %s' % id
         }
         response = jsonify(body)
@@ -30,7 +29,7 @@ def get_one(id):
         return jsonify(user)
 
 @api.route('/users', methods=['POST'])
-def create_one():
+def create_user():
     new_user = db.User()
     new_user.update(request.json)
     new_user.save()
