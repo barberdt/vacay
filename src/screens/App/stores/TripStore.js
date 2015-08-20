@@ -1,4 +1,4 @@
-const { Map } = require('immutable');
+const Immutable = require('immutable');
 
 const alt = require('dispatchers/alt');
 const immutableStore = require('alt/utils/ImmutableUtil');
@@ -10,7 +10,7 @@ const TripActions = require('../actions/TripActions');
  */
 class TripStore {
   constructor() {
-    this.state = Map();
+    this.state = Immutable.Map();
 
     this.bindActions(TripActions);
     this.exportPublicMethods({
@@ -24,7 +24,7 @@ class TripStore {
    *
    * @param {Array} trips - The loaded trips.
    */
-  onLoadTripsSuccess(trips) {
+  onLoadTripsSuccess() {
     this.setState(this.state.merge({
       foo: 'bar'
     }));

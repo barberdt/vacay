@@ -3,13 +3,13 @@ const TripStore = require('../stores/TripStore');
 
 
 /**
- * Actions specific to the Root component.
+ * Actions specific to the App component.
  *
  * Generated void actions:
  * - resetSuccess
  * - resetFailure
  */
-class RootActions {
+class AppActions {
   constructor() {
     this.generateActions('resetSuccess', 'resetFailure');
   }
@@ -29,4 +29,4 @@ class RootActions {
   }
 }
 
-module.exports = alt.createActions(RootActions);
+module.exports = alt.createActions(AppActions);

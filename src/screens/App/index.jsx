@@ -1,22 +1,22 @@
 const connectToStores = require('alt/utils/connectToStores');
-const RootActions = require('./actions/RootActions');
-const RootStore = require('./stores/RootStore');
+const AppActions = require('./actions/AppActions');
+const AppStore = require('./stores/AppStore');
 
-const Root = require('./components/Root');
+const App = require('./components/App');
 
 
-const connectedRoot = connectToStores({
+const connectedApp = connectToStores({
   getStores() {
-    return [RootStore];
+    return [AppStore];
   },
 
   getPropsFromStores() {
-    return RootStore.getState().toObject();
+    return AppStore.getState().toObject();
   },
 
   componentDidConnect() {
-    RootActions.reset();
+    AppActions.reset();
   }
-}, Root);
+}, App);
 
-module.exports = connectedRoot;
+module.exports = connectedApp;
