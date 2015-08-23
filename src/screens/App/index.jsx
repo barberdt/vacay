@@ -11,7 +11,12 @@ const connectedApp = connectToStores({
   },
 
   getPropsFromStores() {
-    return AppStore.getState().toObject();
+    const { isLoading, trips } = AppStore.getState().toObject();
+
+    return {
+      isLoading: isLoading || !trips,
+      trips
+    };
   },
 
   componentDidConnect() {

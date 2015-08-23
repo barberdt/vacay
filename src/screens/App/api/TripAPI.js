@@ -1,6 +1,8 @@
 const axios = require('axios');
 
 
+const ROOT_PATH = '/api/trips';
+
 /**
  * A collection of trip-related API methods.
  */
@@ -11,8 +13,8 @@ const TripAPI = {
    *
    * @return {Promise} A promise that will resolve on load success.
    */
-  loadTrips() {
-    return axios.get('/api/trips');
+  load() {
+    return axios.get(`${ROOT_PATH}`);
   }
 };
 

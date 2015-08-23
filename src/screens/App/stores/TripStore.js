@@ -14,20 +14,22 @@ class TripStore {
 
     this.bindActions(TripActions);
     this.exportPublicMethods({
-      fetchTrips: this.fetchTrips
+      fetch: this.fetch
     });
   }
 
   /**
-   * Handler for TripActions.loadTripsSuccess. Put the store in a non-loading
-   * state.
+   * Handler for TripActions.loadSuccess. Put the store in a non-loading state.
    *
    * @param {Array} trips - The loaded trips.
    */
-  onLoadTripsSuccess() {
-    this.setState(this.state.merge({
-      foo: 'bar'
-    }));
+  onLoadSuccess(trips) {
+    const tripMap = trips.reduce((current, trip) => {
+      current[trip._id] = trip;
+      return current;
+    }, {});
+
+    this.setState(Immutable.fromJS(tripMap));
   }
 
   /**
@@ -36,13 +38,13 @@ class TripStore {
    *
    * @return {Promise} A promise that will resolve with the loaded trips.
    */
-  fetchTrips() {
+  fetch() {
     const trips = this.getState();
 
     if (trips.size > 0) {
       return Promise.resolve(trips);
     } else {
-      return TripActions.loadTrips();
+      return TripActions.load();
     }
   }
 }

@@ -20,6 +20,11 @@ const App = React.createClass({
     trips: React.PropTypes.instanceOf(Immutable.Map)
   },
 
+  renderTrips() {
+    const numTrips = this.props.trips.size;
+    return <div>There are {numTrips} trips.</div>;
+  },
+
   render() {
     const { isLoading } = this.props;
 
@@ -27,7 +32,7 @@ const App = React.createClass({
       <div className="Vacay">
         <h1>Vacay</h1>
         <h2>Plan a trip!</h2>
-        {isLoading ? 'Loading' : 'Not loading'}
+        {isLoading ? 'Loading' : this.renderTrips()}
         <RouteHandler />
       </div>
     );

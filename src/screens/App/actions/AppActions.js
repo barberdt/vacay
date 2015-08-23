@@ -19,7 +19,7 @@ class AppActions {
    * store.
    */
   reset() {
-    TripStore.fetchTrips()
+    TripStore.fetch()
       .then(() => {
         this.actions.resetSuccess();
       })

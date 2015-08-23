@@ -12,16 +12,16 @@ class TripActions {
    *
    * @return {Promise} A promise that will resolve after load success.
    */
-  loadTrips() {
+  load() {
     this.dispatch();
 
-    return TripAPI.loadTrips()
+    return TripAPI.load()
       .then((resp) => {
-        this.actions.loadTripsSuccess(resp.data.results);
+        this.actions.loadSuccess(resp.data.results);
         return Promise.resolve();
       })
       .catch((resp) => {
-        this.actions.loadTripsFailure(resp.message);
+        this.actions.loadFailure(resp.message);
         return Promise.reject();
       });
   }
@@ -32,7 +32,7 @@ class TripActions {
    * @param {Array} trips - The loaded trips.
    *
    */
-  loadTripsSuccess(trips) {
+  loadSuccess(trips) {
     this.dispatch(trips);
   }
 
@@ -41,7 +41,7 @@ class TripActions {
    *
    * @param {String} message - The error message.
    */
-  loadTripsFailure(message) {
+  loadFailure(message) {
     this.dispatch(message);
   }
 }
