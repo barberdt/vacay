@@ -1,18 +1,31 @@
+"use strict";
+
+const mongoose = require('mongoose');
 const koa = require('koa');
 const Router = require('koa-router');
 
 
+// App
 const app = koa();
-const router = new Router();
-
 app.name = 'Vacay';
 
-router.get('/koa-test', function* () {
-  this.body = {
-    results: [{
-      foo: 'bar'
-    }]
-  };
+// Mongo
+mongoose.connect('mongodb://localhost/vacay');
+
+const TripSchema = new mongoose.Schema({
+  name: { type: String, default: null }
+});
+
+mongoose.model('Trip', TripSchema);
+
+const Trip = mongoose.model('Trip');
+
+// Router
+const router = new Router();
+
+router.get('/trips', function* () {
+  const trips = yield Trip.find().exec();
+  this.body = { trips: trips };
 });
 
 app.use(router.routes());
