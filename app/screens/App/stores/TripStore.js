@@ -44,7 +44,10 @@ class TripStore {
     if (trips.size > 0) {
       return Promise.resolve(trips);
     } else {
-      return TripActions.load();
+      return TripActions.load()
+        .then(() => {
+          return Promise.resolve(this.getState());
+        });
     }
   }
 }

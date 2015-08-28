@@ -6,6 +6,9 @@ const TripAPI = require('../api/TripAPI');
  * Actions related to trips.
  */
 class TripActions {
+  constructor() {
+    this.generateActions('loadSuccess', 'loadFailure');
+  }
 
   /**
    * Load the trips. Void dispatch.
@@ -17,32 +20,15 @@ class TripActions {
 
     return TripAPI.load()
       .then((resp) => {
-        this.actions.loadSuccess(resp.data.results);
-        return Promise.resolve();
+        const { trips } = resp.data;
+        this.actions.loadSuccess(trips);
+        return Promise.resolve(trips);
       })
       .catch((resp) => {
-        this.actions.loadFailure(resp.message);
-        return Promise.reject();
+        const { message } = resp;
+        this.actions.loadFailure(message);
+        return Promise.reject(message);
       });
-  }
-
-  /**
-   * Invoked after a successful load. Dispatches the loaded trips.
-   *
-   * @param {Array} trips - The loaded trips.
-   *
-   */
-  loadSuccess(trips) {
-    this.dispatch(trips);
-  }
-
-  /**
-   * Invoked after a failed load. Dispatches the error message.
-   *
-   * @param {String} message - The error message.
-   */
-  loadFailure(message) {
-    this.dispatch(message);
   }
 }
 

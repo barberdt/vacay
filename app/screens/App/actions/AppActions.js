@@ -4,10 +4,6 @@ const TripStore = require('../stores/TripStore');
 
 /**
  * Actions specific to the App component.
- *
- * Generated void actions:
- * - resetSuccess
- * - resetFailure
  */
 class AppActions {
   constructor() {

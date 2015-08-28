@@ -2,7 +2,7 @@ module.exports = {
   context: __dirname + '/app',
   entry: './entry',
   output: {
-    path: __dirname + '/vacay/static/js',
+    path: __dirname + '/src/static/js',
     filename: 'vacay.js'
   },
   resolve: {
