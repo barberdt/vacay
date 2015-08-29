@@ -1,10 +1,8 @@
 'use strict';
 
-const bodyParser = require('koa-bodyparser');
 const fs = require('fs');
 const koa = require('koa');
 const mongoose = require('mongoose');
-const path = require('path');
 const Router = require('koa-router');
 const serve = require('koa-static');
 const views = require('co-views');
@@ -37,8 +35,6 @@ fs.readdirSync(modelsPath).forEach((file) => {
     require(modelsPath + '/' + file);
   }
 });
-
-const Trip = mongoose.model('Trip');
 
 // Router
 const router = new Router();
