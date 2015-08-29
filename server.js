@@ -1,34 +1,17 @@
 'use strict';
 
+const appConfig = require('./config/app');
 const fs = require('fs');
 const koa = require('koa');
+const koaConfig = require('./config/koa');
 const mongoose = require('mongoose');
-const Router = require('koa-router');
-const serve = require('koa-static');
-const views = require('co-views');
 
 
-// App
-const app = koa();
-app.name = 'Vacay';
-
-// Views
-app.use(function *(next) {
-  this.render = views(__dirname + '/src/views', {
-    map: { html: 'swig' },
-    cache: 'memory',
-  });
-  yield next;
-});
-
-// Static
-app.use(serve(__dirname + '/src/static'));
-
-// Mongo
-mongoose.connect('mongodb://localhost/vacay');
+// Connect mongo
+mongoose.connect(appConfig.mongoUrl);
 
 // Load models
-const modelsPath = __dirname + '/src/models';
+const modelsPath = appConfig.root + '/src/models';
 
 fs.readdirSync(modelsPath).forEach((file) => {
   if (~file.indexOf('js')) {
@@ -36,34 +19,11 @@ fs.readdirSync(modelsPath).forEach((file) => {
   }
 });
 
-// Router
-const router = new Router();
+// Create app instance
+const app = koa();
 
-router.get('/', function *() {
-  this.type = 'html';
-  try {
-    this.body = yield this.render('index', {
-      scriptUrl: '/js/vacay.js'
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-const tripController = require(__dirname + '/src/controllers/trip');
-router.get('/api/trips', tripController.getAll);
-
-router.get('/:path', function *() {
-  this.type = 'html';
-  try {
-    this.body = yield this.render('index', {
-      scriptUrl: '/js/vacay.js'
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.use(router.routes());
+// Config
+koaConfig(app);
+require('./config/routes')(app);
 
 app.listen(5000);
