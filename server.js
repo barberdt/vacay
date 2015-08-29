@@ -1,8 +1,9 @@
 "use strict";
 
 const bodyParser = require('koa-bodyparser');
-const mongoose = require('mongoose');
+const fs = require('fs');
 const koa = require('koa');
+const mongoose = require('mongoose');
 const path = require('path');
 const Router = require('koa-router');
 const serve = require('koa-static');
@@ -28,11 +29,14 @@ app.use(serve(__dirname + '/src/static'));
 // Mongo
 mongoose.connect('mongodb://localhost/vacay');
 
-const TripSchema = new mongoose.Schema({
-  name: { type: String, default: null }
-});
+// Load models
+const modelsPath = __dirname + '/src/models';
 
-mongoose.model('Trip', TripSchema);
+fs.readdirSync(modelsPath).forEach((file) => {
+  if (~file.indexOf('js')) {
+    require(modelsPath + '/' + file);
+  }
+});
 
 const Trip = mongoose.model('Trip');
 
