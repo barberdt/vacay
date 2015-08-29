@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const bodyParser = require('koa-bodyparser');
 const fs = require('fs');
@@ -54,10 +54,8 @@ router.get('/', function *() {
   }
 });
 
-router.get('/api/trips', function *() {
-  const trips = yield Trip.find().exec();
-  this.body = { trips: trips };
-});
+const tripController = require(__dirname + '/src/controllers/trip');
+router.get('/api/trips', tripController.getAll);
 
 router.get('/:path', function *() {
   this.type = 'html';
