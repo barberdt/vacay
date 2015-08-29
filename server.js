@@ -22,7 +22,7 @@ fs.readdirSync(modelsPath).forEach((file) => {
 // Create app instance
 const app = koa();
 
-// Config
+// Configure app
 koaConfig(app);
 require('./config/routes')(app);
 

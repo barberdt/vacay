@@ -26,6 +26,7 @@ const routerConfig = (app) => {
 
   // Api
   router.get('/api/trips', controllers.tripController.getAll);
+  router.get('/api/trips/:id', controllers.tripController.getOne);
 
   // Catch-all
   router.get('/:path', function *() {
