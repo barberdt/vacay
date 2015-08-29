@@ -21,8 +21,14 @@ const tripController = {
    * Get a single trip by id.
    */
   getOne: function *() {
-    // @todo determine how to retrieve request params
-    const trip = yield Trip.findById(id);
+    const id = this.params.id;
+    let trip;
+
+    try {
+      trip = yield Trip.findById(id).exec();
+    } catch (error) {
+      console.log(error);
+    }
 
     if (!trip) {
       this.status = 404;
