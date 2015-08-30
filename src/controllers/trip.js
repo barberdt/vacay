@@ -20,7 +20,7 @@ const tripController = {
    * Get all trips.
    */
   getAll: function *() {
-    const trips = yield Trip.find().exec();
+    const trips = yield Trip.find();
     this.body = { trips: trips };
   },
 
@@ -32,7 +32,7 @@ const tripController = {
     let trip;
 
     try {
-      trip = yield Trip.findById(id).exec();
+      trip = yield Trip.findById(id);
     } catch (error) {
       console.log(error);
     }
