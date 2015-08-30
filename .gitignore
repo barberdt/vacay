@@ -5,5 +5,5 @@ __pycache__/
 # node modules
 node_modules
 
-# compiled js
-vacay/static/js/*
+# statics
+src/static/*
