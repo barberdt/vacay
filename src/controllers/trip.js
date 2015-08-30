@@ -10,6 +10,13 @@ const Trip = mongoose.model('Trip');
  */
 const tripController = {
   /**
+   * Create a new trip with the given request body.
+   */
+  createOne: function *() {
+    console.log(this.request.body);
+  },
+
+  /**
    * Get all trips.
    */
   getAll: function *() {
