@@ -10,8 +10,9 @@ const Route = Router.Route;
 
 const routes = (
   <Route handler={Vacay}>
-    <Route path="test" handler={Test} />
-    <Route path="other-test" handler={OtherTest} />
+    <Route path="test" handler={Test}>
+      <Route path="other-test" handler={OtherTest} />
+    </Route>
   </Route>
 );
 

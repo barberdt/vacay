@@ -24,9 +24,10 @@ const routerConfig = (app) => {
   router.get('/api/trips/:id', tripController.getOne);
 
   // Catch-all
-  router.get('/:path', viewController.index);
+  router.get('*', viewController.index);
 
   app.use(router.routes());
+  app.use(router.allowedMethods());
 };
 
 module.exports = routerConfig;

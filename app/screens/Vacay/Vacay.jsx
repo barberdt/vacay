@@ -3,12 +3,12 @@ const React = require('react/addons');
 const Router = require('react-router');
 
 
-const RouteHandler = Router.RouteHandler;
+const { RouteHandler } = Router;
 
 /**
- * The root-level app component. This component uses connectToStores.
+ * The root-level app component.
  */
-const App = React.createClass({
+const Vacay = React.createClass({
   propTypes: {
     /**
      * Whether or not the component is in a loading state.
@@ -39,4 +39,4 @@ const App = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = Vacay;

@@ -1,8 +1,11 @@
 const Immutable = require('immutable');
 const React = require('react/addons');
+const Router = require('react-router');
 
 const TripActions = require('actions/TripActions');
 
+
+const { RouteHandler } = Router;
 
 const Test = React.createClass({
   handleClick() {
@@ -12,7 +15,12 @@ const Test = React.createClass({
   },
 
   render() {
-    return <div onClick={this.handleClick}>This is a test.</div>;
+    return (
+      <div>
+        <div onClick={this.handleClick}>This is a test.</div>
+        <RouteHandler />
+      </div>
+    );
   }
 });
 
