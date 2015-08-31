@@ -1,5 +1,5 @@
 const alt = require('dispatchers/alt');
-const TripStore = require('../stores/TripStore');
+const TripStore = require('stores/TripStore');
 
 
 /**

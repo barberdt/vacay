@@ -13,7 +13,10 @@ const tripController = {
    * Create a new trip with the given request body.
    */
   createOne: function *() {
-    console.log(this.request.body);
+    let newTrip = new Trip(this.request.body);
+    newTrip = yield newTrip.save();
+
+    this.body = newTrip;
   },
 
   /**

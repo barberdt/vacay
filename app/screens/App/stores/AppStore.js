@@ -3,7 +3,8 @@ const Immutable = require('immutable');
 const alt = require('dispatchers/alt');
 const immutableStore = require('alt/utils/ImmutableUtil');
 const AppActions = require('../actions/AppActions');
-const TripStore = require('./TripStore');
+const TripActions = require('actions/TripActions');
+const TripStore = require('stores/TripStore');
 
 
 /**
@@ -17,6 +18,9 @@ class AppStore {
     });
 
     this.bindActions(AppActions);
+    this.bindListeners({
+      onCreateTripSuccess: TripActions.createSuccess
+    });
   }
 
   /**
@@ -46,6 +50,16 @@ class AppStore {
   onResetFailure() {
     this.setState(this.state.merge({
       isLoading: false
+    }));
+  }
+
+  /**
+   * Handler for TripActions.createSuccess. Retrieve a fresh list of trips.
+   */
+  onCreateTripSuccess() {
+    this.waitFor(TripStore.dispatchToken);
+    this.setState(this.state.merge({
+      trips: TripStore.getState()
     }));
   }
 }

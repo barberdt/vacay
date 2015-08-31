@@ -1,7 +1,7 @@
 const Immutable = require('immutable');
 const React = require('react/addons');
 
-const TripActions = require('../../actions/TripActions');
+const TripActions = require('actions/TripActions');
 
 
 const Test = React.createClass({
