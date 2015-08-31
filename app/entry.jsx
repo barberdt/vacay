@@ -1,15 +1,15 @@
 const React = require('react/addons');
 const Router = require('react-router');
 
-const App = require('./screens/App');
-const OtherTest = require('./screens/App/screens/OtherTest');
-const Test = require('./screens/App/screens/Test');
+const Vacay = require('./screens/Vacay');
+const OtherTest = require('./screens/Vacay/screens/OtherTest');
+const Test = require('./screens/Vacay/screens/Test');
 
 
 const Route = Router.Route;
 
 const routes = (
-  <Route handler={App}>
+  <Route handler={Vacay}>
     <Route path="test" handler={Test} />
     <Route path="other-test" handler={OtherTest} />
   </Route>

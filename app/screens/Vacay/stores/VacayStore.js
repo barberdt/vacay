@@ -2,7 +2,7 @@ const Immutable = require('immutable');
 
 const alt = require('dispatchers/alt');
 const immutableStore = require('alt/utils/ImmutableUtil');
-const AppActions = require('../actions/AppActions');
+const VacayActions = require('../actions/VacayActions');
 const TripActions = require('actions/TripActions');
 const TripStore = require('stores/TripStore');
 
@@ -10,21 +10,21 @@ const TripStore = require('stores/TripStore');
 /**
  * Store specific to the App component.
  */
-class AppStore {
+class VacayStore {
   constructor() {
     this.state = Immutable.Map({
       isLoading: false,
       trips: null
     });
 
-    this.bindActions(AppActions);
+    this.bindActions(VacayActions);
     this.bindListeners({
       onCreateTripSuccess: TripActions.createSuccess
     });
   }
 
   /**
-   * Handler for AppActions.reset. Set the store to an empty and loading state.
+   * Handler for VacayActions.reset. Set the store to an empty and loading state.
    */
   onReset() {
     this.setState(Immutable.Map({
@@ -34,7 +34,7 @@ class AppStore {
   }
 
   /**
-   * Handler for AppActions.resetSuccess. Retrieve the necessay data from the
+   * Handler for VacayActions.resetSuccess. Retrieve the necessay data from the
    * content store.
    */
   onResetSuccess() {
@@ -45,7 +45,7 @@ class AppStore {
   }
 
   /**
-   * Handler for AppActions.resetFailure. Set the store to a non-loading state.
+   * Handler for VacayActions.resetFailure. Set the store to a non-loading state.
    */
   onResetFailure() {
     this.setState(this.state.merge({
@@ -64,4 +64,4 @@ class AppStore {
   }
 }
 
-module.exports = alt.createStore(immutableStore(AppStore), 'AppStore');
+module.exports = alt.createStore(immutableStore(VacayStore), 'VacayStore');

@@ -5,7 +5,7 @@ const TripStore = require('stores/TripStore');
 /**
  * Actions specific to the App component.
  */
-class AppActions {
+class VacayActions {
   constructor() {
     this.generateActions('resetSuccess', 'resetFailure');
   }
@@ -25,4 +25,4 @@ class AppActions {
   }
 }
 
-module.exports = alt.createActions(AppActions);
+module.exports = alt.createActions(VacayActions);
