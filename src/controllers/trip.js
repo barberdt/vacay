@@ -29,23 +29,13 @@ const tripController = {
    */
   getOne: function *() {
     const id = this.params.id;
-    let trip;
-
-    try {
-      trip = yield Trip.findById(id);
-    } catch (error) {
-      console.log(error);
-    }
+    const trip = yield Trip.findById(id);
 
     if (!trip) {
-      this.status = 404;
-      this.body = {
-        status: 404,
-        message: 'Could not find trip with id ' + id + '.'
-      };
-    } else {
-      this.body = trip;
+      this.throw('Could not find trip with _id ' + id + '.', 404);
     }
+
+    this.body = trip;
   }
 };
 

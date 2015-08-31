@@ -19,6 +19,7 @@ const routerConfig = (app) => {
   router.get('/', viewController.index);
 
   // Api
+  router.post('/api/trips', tripController.createOne);
   router.get('/api/trips', tripController.getAll);
   router.get('/api/trips/:id', tripController.getOne);
 

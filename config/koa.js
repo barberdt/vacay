@@ -1,6 +1,7 @@
 'use strict';
 
 const appConfig = require('./app');
+const bodyParser = require('koa-body');
 const serve = require('koa-static');
 const views = require('co-views');
 
@@ -12,6 +13,27 @@ const views = require('co-views');
  */
 const koaConfig = (app) => {
   app.name = 'Vacay';
+
+  // Error handling
+  app.use(function *(next) {
+    try {
+      yield next;
+    } catch (error) {
+      const status = error.status || 500;
+      const message = error.message || 'Internal server error.';
+
+      this.status = status;
+      this.body = {
+        status: status,
+        message: message
+      };
+
+      this.app.emit('error', error, this);
+    }
+  });
+
+  // Body parsing
+  app.use(bodyParser());
 
   // View rendering
   app.use(function *(next) {

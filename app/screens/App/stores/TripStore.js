@@ -19,6 +19,15 @@ class TripStore {
   }
 
   /**
+   * Handler for TripActions.createSuccess. Put the created trip into the store.
+   *
+   * @param {Object} trip - The created trip.
+   */
+  onCreateSuccess(trip) {
+    this.setState(this.state.set(trip._id, Immutable.Map(trip)));
+  }
+
+  /**
    * Handler for TripActions.loadSuccess. Put the store in a non-loading state.
    *
    * @param {Array} trips - The loaded trips.

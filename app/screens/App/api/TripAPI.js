@@ -9,6 +9,16 @@ const ROOT_PATH = '/api/trips';
 const TripAPI = {
 
   /**
+   * Create a new trip.
+   *
+   * @param {Object} trip - The trip to create.
+   * @return {Promise} A promise that will resolve on save success.
+   */
+  create(trip) {
+    return axios.post(`${ROOT_PATH}`, trip);
+  },
+
+  /**
    * Load the trips.
    *
    * @return {Promise} A promise that will resolve on load success.
