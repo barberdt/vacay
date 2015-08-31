@@ -12,7 +12,7 @@ const views = require('co-views');
  * @param {Object} app - The Koa app instance.
  */
 const koaConfig = (app) => {
-  app.name = 'Vacay';
+  app.name = appConfig.name;
 
   // Error handling
   app.use(function *(next) {
