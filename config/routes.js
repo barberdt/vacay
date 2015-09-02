@@ -12,7 +12,7 @@ const viewController = controllers.viewController;
  *
  * @param {Object} app - The Koa app instance.
  */
-const routerConfig = (app) => {
+const routerConfig = function(app) {
   const router = new Router();
 
   // Index
