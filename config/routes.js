@@ -18,6 +18,12 @@ const routerConfig = function(app) {
   // Index
   router.get('/', viewController.index);
 
+  // Login
+  router.get('/login', viewController.login);
+
+  // Signup
+  router.get('/signup', viewController.signup);
+
   // Api
   router.post('/api/trips', tripController.createOne);
   router.get('/api/trips', tripController.getAll);

@@ -1,6 +1,8 @@
 'use strict';
 
 
+const commonsScriptUrl = '/js/commons.js';
+
 /**
  * Controller for rendering views.
  */
@@ -9,14 +11,30 @@ const viewController = {
    * Render the view for the app's index.
    */
   index: function *() {
-    this.type = 'html';
-    try {
-      this.body = yield this.render('index', {
-        scriptUrl: '/js/vacay.js'
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    this.body = yield this.render('index', {
+      commonsScriptUrl: commonsScriptUrl,
+      scriptUrl: '/js/vacay.js'
+    });
+  },
+
+  /**
+   * Render the view for the login page.
+   */
+  login: function *() {
+    this.body = yield this.render('login', {
+      commonsScriptUrl: commonsScriptUrl,
+      scriptUrl: '/js/login.js'
+    });
+  },
+
+  /**
+   * Render the view for the signup page.
+   */
+  signup: function *() {
+    this.body = yield this.render('signup', {
+      commonsScriptUrl: commonsScriptUrl,
+      scriptUrl: '/js/signup.js'
+    });
   }
 }
 

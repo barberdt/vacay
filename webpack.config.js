@@ -1,10 +1,19 @@
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+
+
 module.exports = {
   context: __dirname + '/app',
-  entry: './entry',
+  entry: {
+    vacay: './screens/Vacay/index',
+    login: './screens/Login/index',
+    signup: './screens/Signup/index'
+  },
   output: {
     path: __dirname + '/src/static/js',
-    filename: 'vacay.js'
+    filename: '[name].js',
+    chunkFilename: '[id].js'
   },
+  plugins: [new CommonsChunkPlugin('commons.js')],
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: [
