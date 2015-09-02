@@ -10,6 +10,11 @@ const OtherTest = require('./screens/OtherTest');
 const Test = require('./screens/Test');
 
 
+const Route = Router.Route;
+
+/**
+ * The Vacay screen connected to stores.
+ */
 const connectedVacay = connectToStores({
   getStores() {
     return [VacayStore];
@@ -29,8 +34,9 @@ const connectedVacay = connectToStores({
   }
 }, Vacay);
 
-const Route = Router.Route;
-
+/**
+ * Global route declaration.
+ */
 const routes = (
   <Route handler={connectedVacay}>
     <Route path="test" handler={Test}>
@@ -39,6 +45,9 @@ const routes = (
   </Route>
 );
 
+/**
+ * Init react router after DOM has loaded.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   Router.run(routes, Router.HistoryLocation, (Root) => {
     React.render(<Root />, document.body);
