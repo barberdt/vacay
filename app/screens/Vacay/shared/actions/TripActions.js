@@ -15,12 +15,11 @@ class TripActions {
    * Create a new trip.
    *
    * @param {Immutable.Map} trip - The trip to create.
-   * @return {Promise} A promise that will resolve after save success.
    */
   create(trip) {
     this.dispatch();
 
-    return TripAPI.create(trip)
+    TripAPI.create(trip)
       .then((resp) => {
         const { data } = resp;
         this.actions.createSuccess(data);
@@ -35,13 +34,11 @@ class TripActions {
 
   /**
    * Load the trips. Void dispatch.
-   *
-   * @return {Promise} A promise that will resolve after load success.
    */
   load() {
     this.dispatch();
 
-    return TripAPI.load()
+    TripAPI.load()
       .then((resp) => {
         const { trips } = resp.data;
         this.actions.loadSuccess(trips);

@@ -2,7 +2,9 @@
 
 const appConfig = require('./app');
 const bodyParser = require('koa-body');
+const redisStore = require('koa-redis');
 const serve = require('koa-static');
+const session = require('koa-generic-session');
 const views = require('co-views');
 
 
@@ -10,9 +12,11 @@ const views = require('co-views');
  * Config for the Koa app.
  *
  * @param {Object} app - The Koa app instance.
+ * @param {Object} passport - The configured passport instance.
  */
-const koaConfig = function(app) {
+const koaConfig = function(app, passport) {
   app.name = appConfig.name;
+  app.keys = ['keys', 'keyskeys'];
 
   // Error handling
   app.use(function *(next) {
@@ -32,8 +36,18 @@ const koaConfig = function(app) {
     }
   });
 
+  // Session
+  app.use(session({
+    key: 'vacay.sid',
+    store: redisStore()
+  }));
+
   // Body parsing
   app.use(bodyParser());
+
+  // Passport
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // View rendering
   app.use(function *(next) {
