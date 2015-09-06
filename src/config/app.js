@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Base config properties
 const base = {
-  root: path.normalize(path.join(__dirname + '/..')),
+  root: path.normalize(path.join(__dirname + '/../..')),
   env: env
 };
 

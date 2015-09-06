@@ -1,10 +1,10 @@
 'use strict';
 
-const authenticated = require('../src/middlewares/authenticated');
-const authenticatedView = require('../src/middlewares/authenticatedView');
-const unauthenticatedView = require('../src/middlewares/unauthenticatedView');
+const authenticated = require('../middlewares/authenticated');
+const authenticatedView = require('../middlewares/authenticatedView');
+const unauthenticatedView = require('../middlewares/unauthenticatedView');
 const Router = require('koa-router');
-const controllers = require('../src/controllers')
+const controllers = require('../controllers')
 
 
 const viewController = controllers.viewController;

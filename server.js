@@ -1,9 +1,9 @@
 'use strict';
 
-const appConfig = require('./config/app');
+const appConfig = require('./src/config/app');
 const fs = require('fs');
 const koa = require('koa');
-const koaConfig = require('./config/koa');
+const koaConfig = require('./src/config/koa');
 const mongoose = require('mongoose');
 const passport = require('koa-passport');
 
@@ -25,7 +25,7 @@ const app = koa();
 
 // Configure passport
 // Require must happens after models have been loaded
-require('./config/passport')(passport);
+require('./src/config/passport')(passport);
 
 // Configure app
 // Must occurr after passport config
@@ -33,6 +33,6 @@ koaConfig(app, passport);
 
 // Configure routes
 // Require must happen after models have been loaded
-require('./config/routes')(app);
+require('./src/config/routes')(app);
 
 app.listen(5000);
