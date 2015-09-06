@@ -36,9 +36,9 @@ const connectedVacay = connectToStores({
  * Global route declaration.
  */
 const routes = (
-  <Route handler={connectedVacay}>
-    <Route path="test" handler={Test}>
-      <Route path="other-test" handler={OtherTest} />
+  <Route path="/" name="index" handler={connectedVacay}>
+    <Route path="test" name="test" handler={Test}>
+      <Route path="other-test" name="otherTest" handler={OtherTest} />
     </Route>
   </Route>
 );

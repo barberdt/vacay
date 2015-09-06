@@ -1,6 +1,6 @@
 import { Map as ImmutableMap } from 'immutable';
 import React, { PropTypes } from 'react/addons';
-import { RouteHandler } from 'react-router';
+import { Link, RouteHandler } from 'react-router';
 
 import VacayActions from './actions/VacayActions';
 
@@ -37,6 +37,8 @@ export default React.createClass({
         <h1>Vacay</h1>
         <h2>Plan a trip!</h2>
         <div onClick={this.logout}>Log Out</div>
+        <Link to="index">Home</Link>
+        <Link to="test">Go To Test</Link>
         {isLoading ? 'Loading' : this.renderTrips()}
         <RouteHandler />
       </div>

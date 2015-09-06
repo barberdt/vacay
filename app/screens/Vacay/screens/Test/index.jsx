@@ -1,6 +1,6 @@
 import { Map as ImmutableMap } from 'immutable';
 import React from 'react/addons';
-import { RouteHandler } from 'react-router';
+import { Link, RouteHandler } from 'react-router';
 
 import TripActions from 'actions/TripActions';
 
@@ -16,6 +16,7 @@ export default React.createClass({
     return (
       <div>
         <div onClick={this.handleClick}>This is a test.</div>
+        <Link to="otherTest">Go To Other Test</Link>
         <RouteHandler />
       </div>
     );
