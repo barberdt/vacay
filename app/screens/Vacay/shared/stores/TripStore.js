@@ -1,8 +1,8 @@
-const Immutable = require('immutable');
+import { Map as ImmutableMap, fromJS } from 'immutable';
 
-const alt = require('dispatchers/alt');
-const immutableStore = require('alt/utils/ImmutableUtil');
-const TripActions = require('actions/TripActions');
+import alt from 'dispatchers/alt';
+import immutableStore from 'alt/utils/ImmutableUtil';
+import TripActions from 'actions/TripActions';
 
 
 /**
@@ -10,7 +10,7 @@ const TripActions = require('actions/TripActions');
  */
 class TripStore {
   constructor() {
-    this.state = Immutable.Map();
+    this.state = ImmutableMap();
 
     this.bindActions(TripActions);
     this.exportPublicMethods({
@@ -24,7 +24,7 @@ class TripStore {
    * @param {Object} trip - The created trip.
    */
   onCreateSuccess(trip) {
-    this.setState(this.state.set(trip.id, Immutable.Map(trip)));
+    this.setState(this.state.set(trip.id, ImmutableMap(trip)));
   }
 
   /**
@@ -38,7 +38,7 @@ class TripStore {
       return current;
     }, {});
 
-    this.setState(Immutable.fromJS(tripMap));
+    this.setState(fromJS(tripMap));
   }
 
   /**
@@ -61,4 +61,4 @@ class TripStore {
   }
 }
 
-module.exports = alt.createStore(immutableStore(TripStore), 'TripStore');
+export default alt.createStore(immutableStore(TripStore), 'TripStore');

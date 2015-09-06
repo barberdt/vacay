@@ -1,10 +1,8 @@
-const React = require('react/addons');
+import React from 'react/addons';
 
 
-const OtherTest = React.createClass({
+export default React.createClass({
   render() {
     return <div>This is another test.</div>;
   }
 });
-
-module.exports = OtherTest;

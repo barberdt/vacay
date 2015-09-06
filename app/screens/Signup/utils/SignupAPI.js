@@ -1,20 +1,13 @@
-const axios = require('axios');
+import { post } from 'axios';
 
 
 const ROOT_PATH = '/auth/signup';
 
 /**
- * A collection of signup-based API methods.
+ * Make a signup request with the given user object.
+ *
+ * @param {Object} user - The user to sign up with.
  */
-const SignupAPI = {
-  /**
-   * Make a signup request with the given user object.
-   *
-   * @param {Object} user - The user to sign up with.
-   */
-  signup(user) {
-    return axios.post(`${ROOT_PATH}`, user);
-  }
-};
-
-module.exports = SignupAPI;
+export function signup(user) {
+  return post(`${ROOT_PATH}`, user);
+}

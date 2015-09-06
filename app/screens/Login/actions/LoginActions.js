@@ -1,6 +1,6 @@
-const alt = require('dispatchers/alt');
+import alt from 'dispatchers/alt';
 
-const LoginAPI = require('../utils/LoginAPI');
+import { login } from '../utils/LoginAPI';
 
 
 /**
@@ -15,9 +15,9 @@ class LoginActions {
    */
   login(username, password) {
     this.dispatch();
-    LoginAPI.login(username, password)
+    login(username, password)
       .then(() => location.href = '/');
   }
 }
 
-module.exports = alt.createActions(LoginActions);
+export default alt.createActions(LoginActions);

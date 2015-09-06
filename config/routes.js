@@ -37,7 +37,7 @@ const routerConfig = function(app) {
   router.get('/api/trips/:id', authenticated, tripController.getOne);
 
   // Catch-all
-  router.get('*', viewController.index);
+  router.get('*', authenticatedView, viewController.index);
 
   app.use(router.routes());
   app.use(router.allowedMethods());

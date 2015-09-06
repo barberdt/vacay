@@ -1,5 +1,5 @@
-const alt = require('dispatchers/alt');
-const TripAPI = require('utils/TripAPI');
+import alt from 'dispatchers/alt';
+import { create, load } from 'utils/TripAPI';
 
 
 /**
@@ -19,7 +19,7 @@ class TripActions {
   create(trip) {
     this.dispatch();
 
-    TripAPI.create(trip)
+    create(trip)
       .then((resp) => {
         const { data } = resp;
         this.actions.createSuccess(data);
@@ -40,7 +40,7 @@ class TripActions {
   load() {
     this.dispatch();
 
-    return TripAPI.load()
+    return load()
       .then((resp) => {
         const { trips } = resp.data;
         this.actions.loadSuccess(trips);
@@ -54,4 +54,4 @@ class TripActions {
   }
 }
 
-module.exports = alt.createActions(TripActions);
+export default alt.createActions(TripActions);

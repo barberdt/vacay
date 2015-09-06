@@ -1,16 +1,14 @@
-const React = require('react/addons');
-const Router = require('react-router');
+import React from 'react/addons';
+import { Route, run, HistoryLocation } from 'react-router';
 
-const connectToStores = require('alt/utils/connectToStores');
-const VacayActions = require('./actions/VacayActions');
-const VacayStore = require('./stores/VacayStore');
+import connectToStores from 'alt/utils/connectToStores';
+import VacayActions from './actions/VacayActions';
+import VacayStore from './stores/VacayStore';
 
-const Vacay = require('./Vacay');
-const OtherTest = require('./screens/OtherTest');
-const Test = require('./screens/Test');
+import Vacay from './Vacay';
+import OtherTest from './screens/OtherTest';
+import Test from './screens/Test';
 
-
-const Route = Router.Route;
 
 /**
  * The Vacay screen connected to stores.
@@ -49,7 +47,7 @@ const routes = (
  * Init react router after DOM has loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  Router.run(routes, Router.HistoryLocation, (Root) => {
+  run(routes, HistoryLocation, (Root) => {
     React.render(<Root />, document.body);
   });
 });

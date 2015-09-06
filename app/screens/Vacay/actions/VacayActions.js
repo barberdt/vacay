@@ -1,7 +1,7 @@
-const axios = require('axios');
+import { post } from 'axios';
 
-const alt = require('dispatchers/alt');
-const TripStore = require('stores/TripStore');
+import alt from 'dispatchers/alt';
+import TripStore from 'stores/TripStore';
 
 
 /**
@@ -28,9 +28,9 @@ class VacayActions {
 
   // @TODO docs
   logout() {
-    axios.post('/auth/logout')
+    post('/auth/logout')
       .then(() => location.href='/login');
   }
 }
 
-module.exports = alt.createActions(VacayActions);
+export default alt.createActions(VacayActions);

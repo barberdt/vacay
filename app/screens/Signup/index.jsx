@@ -1,6 +1,6 @@
-const React = require('react/addons');
+import React from 'react/addons';
 
-const Signup = require('./Signup');
+import Signup from './Signup';
 
 
 /**

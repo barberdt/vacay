@@ -1,25 +1,23 @@
-const Immutable = require('immutable');
-const React = require('react/addons');
-const Router = require('react-router');
+import { Map as ImmutableMap } from 'immutable';
+import React, { PropTypes } from 'react/addons';
+import { RouteHandler } from 'react-router';
 
-const VacayActions = require('./actions/VacayActions');
+import VacayActions from './actions/VacayActions';
 
-
-const { RouteHandler } = Router;
 
 /**
  * The root-level app component.
  */
-const Vacay = React.createClass({
+export default React.createClass({
   propTypes: {
     /**
      * Whether or not the component is in a loading state.
      */
-    isLoading: React.PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     /**
      * The trips to display.
      */
-    trips: React.PropTypes.instanceOf(Immutable.Map)
+    trips: PropTypes.instanceOf(ImmutableMap)
   },
 
   logout() {
@@ -45,5 +43,3 @@ const Vacay = React.createClass({
     );
   }
 });
-
-module.exports = Vacay;

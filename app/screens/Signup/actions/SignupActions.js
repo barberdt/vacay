@@ -1,6 +1,6 @@
-const alt = require('dispatchers/alt');
+import alt from 'dispatchers/alt';
 
-const SignupAPI = require('../utils/SignupAPI');
+import { signup } from '../utils/SignupAPI';
 
 
 /**
@@ -14,9 +14,9 @@ class SignupActions {
    */
   signup(user) {
     this.dispatch();
-    SignupAPI.signup(user)
+    signup(user)
       .then(() => location.href = '/');
   }
 }
 
-module.exports = alt.createActions(SignupActions);
+export default alt.createActions(SignupActions);

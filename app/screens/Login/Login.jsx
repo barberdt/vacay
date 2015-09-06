@@ -1,12 +1,12 @@
-const React = require('react/addons');
+import React from 'react/addons';
 
-const LoginActions = require('./actions/LoginActions');
+import LoginActions from './actions/LoginActions';
 
 
 /**
  * The login component.
  */
-const Login = React.createClass({
+export default React.createClass({
   getInitialState() {
     return {
       username: null,
@@ -53,5 +53,3 @@ const Login = React.createClass({
     );
   }
 });
-
-module.exports = Login;

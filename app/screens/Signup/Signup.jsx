@@ -1,12 +1,12 @@
-const React = require('react/addons');
+import React from 'react/addons';
 
-const SignupActions = require('./actions/SignupActions');
+import SignupActions from './actions/SignupActions';
 
 
 /**
  * The signup component.
  */
-const Signup = React.createClass({
+export default React.createClass({
   getInitialState() {
     return {
       username: null,
@@ -52,5 +52,3 @@ const Signup = React.createClass({
     );
   }
 });
-
-module.exports = Signup;

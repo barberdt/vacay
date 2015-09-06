@@ -1,10 +1,10 @@
-const Immutable = require('immutable');
+import { Map as ImmutableMap } from 'immutable';
 
-const alt = require('dispatchers/alt');
-const immutableStore = require('alt/utils/ImmutableUtil');
-const VacayActions = require('../actions/VacayActions');
-const TripActions = require('actions/TripActions');
-const TripStore = require('stores/TripStore');
+import alt from 'dispatchers/alt';
+import immutableStore from 'alt/utils/ImmutableUtil';
+import VacayActions from '../actions/VacayActions';
+import TripActions from 'actions/TripActions';
+import TripStore from 'stores/TripStore';
 
 
 /**
@@ -12,7 +12,7 @@ const TripStore = require('stores/TripStore');
  */
 class VacayStore {
   constructor() {
-    this.state = Immutable.Map({
+    this.state = ImmutableMap({
       isLoading: false,
       trips: null
     });
@@ -27,7 +27,7 @@ class VacayStore {
    * Handler for VacayActions.reset. Set the store to an empty and loading state.
    */
   onReset() {
-    this.setState(Immutable.Map({
+    this.setState(ImmutableMap({
       isLoading: true,
       trips: null
     }));
@@ -64,4 +64,4 @@ class VacayStore {
   }
 }
 
-module.exports = alt.createStore(immutableStore(VacayStore), 'VacayStore');
+export default alt.createStore(immutableStore(VacayStore), 'VacayStore');

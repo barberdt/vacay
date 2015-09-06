@@ -1,15 +1,13 @@
-const Immutable = require('immutable');
-const React = require('react/addons');
-const Router = require('react-router');
+import { Map as ImmutableMap } from 'immutable';
+import React from 'react/addons';
+import { RouteHandler } from 'react-router';
 
-const TripActions = require('actions/TripActions');
+import TripActions from 'actions/TripActions';
 
 
-const { RouteHandler } = Router;
-
-const Test = React.createClass({
+export default React.createClass({
   handleClick() {
-    TripActions.create(Immutable.Map({
+    TripActions.create(ImmutableMap({
       name: 'Foobar'
     }));
   },
@@ -23,5 +21,3 @@ const Test = React.createClass({
     );
   }
 });
-
-module.exports = Test;
