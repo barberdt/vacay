@@ -1,5 +1,6 @@
 'use strict';
 
+// @TODO docs
 const authenticated = function *(next) {
   if (this.isAuthenticated()) {
     yield next;
