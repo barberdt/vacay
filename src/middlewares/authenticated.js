@@ -2,9 +2,6 @@
 
 // @TODO docs
 module.exports = function *(next) {
-  if (this.isAuthenticated()) {
-    yield next;
-  } else {
-    this.throw('Requires authentication.', 401);
-  }
+  this.assert(this.isAuthenticated(), 401, 'Requires authentication.');
+  yield next;
 };

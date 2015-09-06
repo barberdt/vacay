@@ -33,11 +33,7 @@ module.exports = {
   getOne: function *() {
     const id = this.params.id;
     const trip = yield Trip.findById(id);
-
-    if (!trip) {
-      this.throw(`Could not find trip with id ${id}.`, 404);
-    }
-
+    this.assert(trip, 404, `Could not find trip with id ${id}.`);
     this.body = trip;
   }
 };

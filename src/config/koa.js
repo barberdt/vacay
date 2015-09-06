@@ -25,12 +25,17 @@ module.exports = function(app, passport) {
     } catch (error) {
       const status = error.status || 500;
       const message = error.message || 'Internal server error.';
+      const body = {
+        status: status,
+        message: message,
+      };
+
+      if (error.fields) {
+        body.fields = error.fields;
+      }
 
       this.status = status;
-      this.body = {
-        status: status,
-        message: message
-      };
+      this.body = body;
 
       this.app.emit('error', error, this);
     }
