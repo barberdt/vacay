@@ -24,7 +24,7 @@ class TripStore {
    * @param {Object} trip - The created trip.
    */
   onCreateSuccess(trip) {
-    this.setState(this.state.set(trip._id, Immutable.Map(trip)));
+    this.setState(this.state.set(trip.id, Immutable.Map(trip)));
   }
 
   /**
@@ -34,7 +34,7 @@ class TripStore {
    */
   onLoadSuccess(trips) {
     const tripMap = trips.reduce((current, trip) => {
-      current[trip._id] = trip;
+      current[trip.id] = trip;
       return current;
     }, {});
 

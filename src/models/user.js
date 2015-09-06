@@ -1,20 +1,21 @@
 'use strict';
 
-// const bcrypt = require('bcrypt-as-promised');
-const bcrypt = 'foobar';
+const bcrypt = require('bcrypt-as-promised');
+const co = require('co');
+const createSchema = require('../utils/createSchema');
 const mongoose = require('mongoose');
 
 /**
  * The document schema for db.users.
  */
-const UserSchema = new mongoose.Schema({
+const UserSchema = createSchema({
   username: {
     type: String,
     required: true,
     unique: true,
     lowercase: true
   },
-  password: { type: String, required: true }
+  password: { type: String, required: true, hideJSON: true }
 });
 
 /**
@@ -23,7 +24,11 @@ const UserSchema = new mongoose.Schema({
  * @param {Function} done - The function to call when the hook is complete.
  */
 UserSchema.pre('save', function(done) {
-  if (this.isModified('passsword')) {
+  try {
+    if (!this.isModified('password')) {
+      done();
+    }
+
     co(this.encryptPassword.bind(this))
       .then(function() {
         done();
@@ -31,6 +36,8 @@ UserSchema.pre('save', function(done) {
       .catch(function(error) {
         done(error);
       });
+  } catch (error) {
+    done(error);
   }
 });
 

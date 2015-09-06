@@ -14,7 +14,7 @@ const User = mongoose.model('User');
  * @param {Function} done - The function to call when serialization is done.
  */
 const serializeUser = function(user, done) {
-  done(null, user._id);
+  done(null, user.id);
 };
 
 /**

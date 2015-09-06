@@ -34,11 +34,13 @@ class TripActions {
 
   /**
    * Load the trips. Void dispatch.
+   *
+   * @return {Promise} A promise that will resolve after a successful load.
    */
   load() {
     this.dispatch();
 
-    TripAPI.load()
+    return TripAPI.load()
       .then((resp) => {
         const { trips } = resp.data;
         this.actions.loadSuccess(trips);

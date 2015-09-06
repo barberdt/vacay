@@ -35,7 +35,7 @@ const tripController = {
     const trip = yield Trip.findById(id);
 
     if (!trip) {
-      this.throw(`Could not find trip with _id ${id}.`, 404);
+      this.throw(`Could not find trip with id ${id}.`, 404);
     }
 
     this.body = trip;
