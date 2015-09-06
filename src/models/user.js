@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
  * The document schema for db.users.
  */
 const UserSchema = createSchema({
+  // @TODO use an email address instead of a username
   username: {
     type: String,
     required: true,
@@ -29,7 +30,7 @@ UserSchema.pre('save', function(done) {
       done();
     }
 
-    co(this.encryptPassword.bind(this))
+    co.wrap(this.encryptPassword).call(this)
       .then(function() {
         done();
       })

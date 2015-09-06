@@ -17,7 +17,8 @@ const envs = {
   'development': {
     port: 3000,
     name: 'Vacay Dev',
-    mongoUrl: 'mongodb://localhost/vacay'
+    mongoUrl: 'mongodb://localhost/vacay',
+    keys: ['secretsss']
   }
 };
 

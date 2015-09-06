@@ -16,7 +16,7 @@ const views = require('co-views');
  */
 const koaConfig = function(app, passport) {
   app.name = appConfig.name;
-  app.keys = ['keys', 'keyskeys'];
+  app.keys = appConfig.keys;
 
   // Error handling
   app.use(function *(next) {
@@ -37,10 +37,7 @@ const koaConfig = function(app, passport) {
   });
 
   // Session
-  app.use(session({
-    key: 'vacay.sid',
-    store: redisStore()
-  }));
+  app.use(session({ key: 'vacay.sid', store: redisStore() }));
 
   // Body parsing
   app.use(bodyParser());

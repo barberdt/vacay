@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-const ROOT_PATH = '/login';
+const ROOT_PATH = '/auth/login';
 
 /**
  * A collection of login-based API methods.

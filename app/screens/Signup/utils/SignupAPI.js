@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-const ROOT_PATH = '/signup';
+const ROOT_PATH = '/auth/signup';
 
 /**
  * A collection of signup-based API methods.

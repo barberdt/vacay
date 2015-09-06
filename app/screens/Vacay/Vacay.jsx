@@ -2,6 +2,8 @@ const Immutable = require('immutable');
 const React = require('react/addons');
 const Router = require('react-router');
 
+const VacayActions = require('./actions/VacayActions');
+
 
 const { RouteHandler } = Router;
 
@@ -20,6 +22,10 @@ const Vacay = React.createClass({
     trips: React.PropTypes.instanceOf(Immutable.Map)
   },
 
+  logout() {
+    VacayActions.logout();
+  },
+
   renderTrips() {
     const numTrips = this.props.trips.size;
     return <div>There are {numTrips} trips.</div>;
@@ -32,6 +38,7 @@ const Vacay = React.createClass({
       <div className="Vacay">
         <h1>Vacay</h1>
         <h2>Plan a trip!</h2>
+        <div onClick={this.logout}>Log Out</div>
         {isLoading ? 'Loading' : this.renderTrips()}
         <RouteHandler />
       </div>

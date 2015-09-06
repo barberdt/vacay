@@ -1,13 +1,13 @@
 'use strict';
 
-const signupController = require('./signup');
+const authController = require('./auth');
 const tripController = require('./trip');
 const viewController = require('./view');
 
 
 const controllers = {
   viewController: viewController,
-  signupController: signupController,
+  authController: authController,
   tripController: tripController
 };
 

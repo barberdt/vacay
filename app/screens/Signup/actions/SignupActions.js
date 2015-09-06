@@ -14,7 +14,8 @@ class SignupActions {
    */
   signup(user) {
     this.dispatch();
-    SignupAPI.signup(user);
+    SignupAPI.signup(user)
+      .then(() => location.href = '/');
   }
 }
 

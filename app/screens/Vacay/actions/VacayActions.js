@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const alt = require('dispatchers/alt');
 const TripStore = require('stores/TripStore');
 
@@ -22,6 +24,12 @@ class VacayActions {
       .catch(() => {
         this.actions.resetFaliure();
       });
+  }
+
+  // @TODO docs
+  logout() {
+    axios.post('/auth/logout')
+      .then(() => location.href='/login');
   }
 }
 

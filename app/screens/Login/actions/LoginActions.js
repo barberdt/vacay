@@ -15,7 +15,8 @@ class LoginActions {
    */
   login(username, password) {
     this.dispatch();
-    LoginAPI.login(username, password);
+    LoginAPI.login(username, password)
+      .then(() => location.href = '/');
   }
 }
 

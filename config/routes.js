@@ -1,12 +1,14 @@
 'use strict';
 
 const authenticated = require('../src/middlewares/authenticated');
+const authenticatedView = require('../src/middlewares/authenticatedView');
+const unauthenticatedView = require('../src/middlewares/unauthenticatedView');
 const Router = require('koa-router');
 const controllers = require('../src/controllers')
 
 
 const viewController = controllers.viewController;
-const signupController = controllers.signupController;
+const authController = controllers.authController;
 const tripController = controllers.tripController;
 
 /**
@@ -17,15 +19,17 @@ const tripController = controllers.tripController;
 const routerConfig = function(app) {
   const router = new Router();
 
-  // Index
-  router.get('/', viewController.index);
+  // Views
+  router.get('/', authenticatedView, viewController.index);
+  router.get('/login', unauthenticatedView, viewController.login);
+  router.get('/signup', unauthenticatedView, viewController.signup);
 
-  // Login
-  router.get('/login', viewController.login);
-
-  // Signup
-  router.get('/signup', viewController.signup);
-  router.post('/signup', signupController.signup);
+  // Auth
+  router.post('/auth/login', authController.login);
+  // @TODO get on logout is temporary, remove it
+  router.get('/auth/logout', authController.logout);
+  router.post('/auth/logout', authController.logout);
+  router.post('/auth/signup', authController.signup);
 
   // Api
   router.post('/api/trips', authenticated, tripController.createOne);
