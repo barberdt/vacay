@@ -38,10 +38,8 @@ const deserializeUser = function(id, done) {
  *
  * @param {Object} passport - The passport instance to configure.
  */
-const passportConfig = function(passport) {
+module.exports = function(passport) {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   passport.use(new LocalStrategy(authenticateUser));
 };
-
-module.exports = passportConfig;

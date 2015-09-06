@@ -49,7 +49,7 @@ const hideFields = function(ret, hidePathnames) {
  *
  * @param {Object} schema - The schema to alter the JSON transform for.
  */
-const schemaJSONTransform = function(schema) {
+module.exports = function(schema) {
   const options = schema.options;
   const existingOption = options.toJSON;
   const existingTransform = existingOption ? existingOption.transform : null;
@@ -72,5 +72,3 @@ const schemaJSONTransform = function(schema) {
     options.toJSON = { transform: newTransform };
   }
 };
-
-module.exports = schemaJSONTransform;

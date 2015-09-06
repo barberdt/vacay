@@ -6,7 +6,7 @@ const commonsScriptUrl = '/js/commons.js';
 /**
  * Controller for rendering views.
  */
-const viewController = {
+module.exports = {
   /**
    * Render the view for the app's index.
    */
@@ -37,5 +37,3 @@ const viewController = {
     });
   }
 }
-
-module.exports = viewController;

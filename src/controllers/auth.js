@@ -9,7 +9,7 @@ const User = mongoose.model('User');
 /**
  * The controller for auth-related endpoints.
  */
-const authController = {
+module.exports = {
   /**
    * Log in.
    */
@@ -51,5 +51,3 @@ const authController = {
     this.body = this.passport.user;
   }
 };
-
-module.exports = authController;

@@ -14,7 +14,7 @@ const views = require('co-views');
  * @param {Object} app - The Koa app instance.
  * @param {Object} passport - The configured passport instance.
  */
-const koaConfig = function(app, passport) {
+module.exports = function(app, passport) {
   app.name = appConfig.name;
   app.keys = appConfig.keys;
 
@@ -58,5 +58,3 @@ const koaConfig = function(app, passport) {
   // Static serving
   app.use(serve(appConfig.root + '/src/static'));
 };
-
-module.exports = koaConfig;

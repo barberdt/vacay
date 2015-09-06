@@ -8,7 +8,7 @@ const Trip = mongoose.model('Trip');
 /**
  * DAO controller for db.trips.
  */
-const tripController = {
+module.exports = {
   /**
    * Create a new trip with the given request body.
    */
@@ -41,5 +41,3 @@ const tripController = {
     this.body = trip;
   }
 };
-
-module.exports = tripController;

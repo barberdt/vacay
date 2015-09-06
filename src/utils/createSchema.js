@@ -10,10 +10,8 @@ const schemaJSONTransform = require('./schemaJSONTransform');
  * @param {Objcet} fields - The schema fields.
  * @return {Object} The newly created schema.
  */
-const createSchema = function(fields, options) {
+module.exports = function(fields, options) {
   const schema = new mongoose.Schema(fields, options);
   schema.plugin(schemaJSONTransform);
   return schema;
 };
-
-module.exports = createSchema;
