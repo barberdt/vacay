@@ -6,13 +6,11 @@ import LoginActions from './actions/LoginActions';
 /**
  * The login component.
  */
-export default React.createClass({
-  getInitialState() {
-    return {
-      username: null,
-      password: null
-    };
-  },
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { username: null, password: null };
+  }
 
   /**
    * Attempt to log in.
@@ -23,33 +21,33 @@ export default React.createClass({
     e.preventDefault();
     const { username, password } = this.state;
     LoginActions.login(username, password);
-  },
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  },
+  }
 
   render() {
     const { username, password } = this.state;
 
     return (
-      <form role="form" onSubmit={this.login}>
+      <form role="form" onSubmit={this.login.bind(this)}>
         <input
           type="text"
           placeholder="Username"
           name="username"
           value={username}
-          onChange={this.onChange}
+          onChange={this.onChange.bind(this)}
         />
         <input
           type="password"
           placeholder="Password"
           name="password"
           value={password}
-          onChange={this.onChange}
+          onChange={this.onChange.bind(this)}
         />
         <button type="submit">Log In</button>
       </form>
     );
   }
-});
+}
