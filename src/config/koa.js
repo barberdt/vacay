@@ -2,6 +2,7 @@
 
 const appConfig = require('./app');
 const bodyParser = require('koa-body');
+const fieldValidate = require('koa-field-validate');
 const redisStore = require('koa-redis');
 const serve = require('koa-static');
 const session = require('koa-generic-session');
@@ -27,7 +28,7 @@ module.exports = function(app, passport) {
       const message = error.message || 'Internal server error.';
       const body = {
         status: status,
-        message: message,
+        message: message
       };
 
       if (error.fields) {
@@ -46,6 +47,9 @@ module.exports = function(app, passport) {
 
   // Body parsing
   app.use(bodyParser());
+
+  // Field validation
+  app.use(fieldValidate());
 
   // Passport
   app.use(passport.initialize());

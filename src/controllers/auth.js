@@ -14,7 +14,10 @@ module.exports = {
    * Log in.
    */
   login: function *() {
-    // @TODO validate fields
+    this.validate('username').isRequired();
+    this.validate('password').isRequired();
+    this.assert(!this.fieldErrors, 400, { fields: this.fieldErrors });
+
     const _this = this;
     yield* passport.authenticate('local', function *(err, user) {
       if (err) {
@@ -43,11 +46,19 @@ module.exports = {
    * Sign up the requested new user and log them in.
    */
   signup: function *() {
-    // @TODO validate non-existing user and fields
+    this.validate('username').isRequired();
+    this.validate('password').isRequired();
+
+    // Validate that an existing user with that username does not already exist.
+    const existingUser = yield User.findOne({
+      username: this.request.body.username
+    });
+
+    this.assert(!existingUser, 400, 'A user with that username already exists.');
+
     let newUser = new User(this.request.body);
     newUser = yield newUser.save();
     yield this.login(newUser);
-    // @TODO why passport user?
-    this.body = this.passport.user;
+    this.body = newUser;
   }
 };
