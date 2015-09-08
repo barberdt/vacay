@@ -7,6 +7,10 @@ import { signup } from '../utils/signupAPI';
  * Signup actions.
  */
 class SignupActions {
+  constructor() {
+    this.generateActions('signupSuccess', 'signupFailure');
+  }
+
   /**
    * Make a signup request. Void dispatch.
    *
@@ -15,7 +19,13 @@ class SignupActions {
   signup(user) {
     this.dispatch();
     signup(user)
-      .then(() => location.href = '/');
+      .then(() => {
+        this.actions.signupSuccess();
+        location.href = '/';
+      })
+      .catch((resp) => {
+        this.actions.signupFailure(resp);
+      });
   }
 }
 

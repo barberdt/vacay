@@ -48,6 +48,7 @@ module.exports = {
   signup: function *() {
     this.validate('username').isRequired();
     this.validate('password').isRequired();
+    this.assert(!this.fieldErrors, 400, { fields: this.fieldErrors });
 
     // Validate that an existing user with that username does not already exist.
     const existingUser = yield User.findOne({

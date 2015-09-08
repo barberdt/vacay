@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import { Map as ImmutableMap } from 'immutable';
+import React, { PropTypes } from 'react/addons';
 
 import SignupActions from './actions/SignupActions';
 
@@ -6,7 +7,7 @@ import SignupActions from './actions/SignupActions';
 /**
  * The signup component.
  */
-export default class extends React.Component {
+export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = { username: null, password: null }
@@ -50,3 +51,10 @@ export default class extends React.Component {
     );
   }
 }
+
+Signup.propTypes = {
+  /**
+   * The error state for the signup form.
+   */
+  error: PropTypes.instanceOf(ImmutableMap)
+};

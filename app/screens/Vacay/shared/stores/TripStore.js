@@ -1,4 +1,4 @@
-import { Map as ImmutableMap, fromJS } from 'immutable';
+import { fromJS, Map as ImmutableMap } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';

@@ -13,7 +13,7 @@ import Test from './screens/Test';
 /**
  * The Vacay screen connected to stores.
  */
-const connectedVacay = connectToStores({
+const ConnectedVacay = connectToStores({
   getStores() {
     return [VacayStore];
   },
@@ -36,7 +36,7 @@ const connectedVacay = connectToStores({
  * Global route declaration.
  */
 const routes = (
-  <Route path="/" name="index" handler={connectedVacay}>
+  <Route path="/" name="index" handler={ConnectedVacay}>
     <Route path="test" name="test" handler={Test}>
       <Route path="other-test" name="otherTest" handler={OtherTest} />
     </Route>
