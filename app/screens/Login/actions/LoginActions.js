@@ -1,6 +1,6 @@
 import alt from 'dispatchers/alt';
 
-import { login } from '../utils/LoginAPI';
+import { login } from '../utils/loginAPI';
 
 
 /**

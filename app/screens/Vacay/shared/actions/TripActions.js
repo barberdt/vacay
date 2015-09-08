@@ -1,5 +1,5 @@
 import alt from 'dispatchers/alt';
-import { create, load } from 'utils/TripAPI';
+import { create, load } from 'utils/tripAPI';
 
 
 /**
