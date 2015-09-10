@@ -3,6 +3,8 @@ import React, { PropTypes } from 'react/addons';
 
 import SignupActions from './actions/SignupActions';
 
+import Input from 'components/formFields/Input';
+
 
 /**
  * The signup component.
@@ -28,23 +30,25 @@ export default class Signup extends React.Component {
   }
 
   render() {
+    const { fieldErrors } = this.props;
     const { username, password } = this.state;
 
     return (
       <form role="form" onSubmit={this.signup.bind(this)}>
-        <input
-          type="text"
+        <Input
           placeholder="Username"
           name="username"
           value={username}
           onChange={this.onChange.bind(this)}
+          errors={fieldErrors ? fieldErrors.get('username') : null}
         />
-        <input
+        <Input
           type="password"
           placeholder="Password"
           name="password"
           value={password}
           onChange={this.onChange.bind(this)}
+          errors={fieldErrors ? fieldErrors.get('password') : null}
         />
         <button type="Submit">Sign Up</button>
       </form>
@@ -54,7 +58,7 @@ export default class Signup extends React.Component {
 
 Signup.propTypes = {
   /**
-   * The error state for the signup form.
+   * The field errors for the signup form.
    */
-  error: PropTypes.instanceOf(ImmutableMap)
+  fieldErrors: PropTypes.instanceOf(ImmutableMap)
 };

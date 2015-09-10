@@ -10,7 +10,7 @@ const ConnectedSignup = connectToStores({
   },
 
   getPropsFromStores() {
-    return { error: SignupStore.getState().get('error') };
+    return { fieldErrors: SignupStore.getState().get('fieldErrors') };
   }
 }, Signup);
 
