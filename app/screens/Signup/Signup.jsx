@@ -25,38 +25,50 @@ export default class Signup extends React.Component {
     SignupActions.signup(this.state);
   }
 
+  /**
+   * Set state with the changed field's new value.
+   *
+   * @param {Object} e - The event emitted by the changed field.
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
-    const { fieldErrors } = this.props;
+    const { errorMessage, fieldErrors } = this.props;
     const { username, password } = this.state;
 
     return (
-      <form role="form" onSubmit={this.signup.bind(this)}>
-        <Input
-          placeholder="Username"
-          name="username"
-          value={username}
-          onChange={this.onChange.bind(this)}
-          errors={fieldErrors ? fieldErrors.get('username') : null}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={this.onChange.bind(this)}
-          errors={fieldErrors ? fieldErrors.get('password') : null}
-        />
-        <button type="Submit">Sign Up</button>
-      </form>
+      <div>
+        {errorMessage && <div>{errorMessage}</div>}
+        <form role="form" onSubmit={this.signup.bind(this)}>
+          <Input
+            placeholder="Username"
+            name="username"
+            value={username}
+            onChange={this.onChange.bind(this)}
+            errors={fieldErrors ? fieldErrors.get('username') : null}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={this.onChange.bind(this)}
+            errors={fieldErrors ? fieldErrors.get('password') : null}
+          />
+          <button type="Submit">Sign Up</button>
+        </form>
+      </div>
     );
   }
 }
 
 Signup.propTypes = {
+  /**
+   * The overall error message to show.
+   */
+  errorMessage: PropTypes.string,
   /**
    * The field errors for the signup form.
    */

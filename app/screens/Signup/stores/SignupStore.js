@@ -10,8 +10,7 @@ import SignupActions from '../actions/SignupActions';
  */
 class SignupStore {
   constructor() {
-    this.state = ImmutableMap({ fieldErrors: null });
-
+    this.state = ImmutableMap({ errorMessage: null, fieldErrors: null });
     this.bindActions(SignupActions);
   }
 
@@ -19,16 +18,22 @@ class SignupStore {
    * Handler for SignupActions.signup. Null out field errors.
    */
   onSignup() {
-    this.setState(this.state.set('fieldErrors', null));
+    this.setState(this.state.merge({ errorMessage: null, fieldErrors: null }));
   }
 
   /**
    * Handler for SignupActions.signupFailure. Set the given error state.
    *
-   * @param {Array} fieldErrors - Field errors from the failed signup.
+   * @param {Object} body - The error response body from signup failure.
    */
-  onSignupFailure(fieldErrors) {
-    this.setState(this.state.set('fieldErrors', fromJS(fieldErrors)));
+  onSignupFailure(body) {
+    const { message, fields } = body;
+
+    if (fields) {
+      this.setState(this.state.set('fieldErrors', fromJS(fields)));
+    } else {
+      this.setState(this.state.set('errorMessage', message));
+    }
   }
 }
 

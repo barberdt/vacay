@@ -8,6 +8,8 @@ import React, { PropTypes } from 'react/addons';
 export default class FormField extends React.Component {
   /**
    * Given the errors prop, construct a human-readable message.
+   *
+   * @return {String} The constructed error message.
    */
   generateErrorMessage() {
     const { errors, name } = this.props;

@@ -24,7 +24,7 @@ class SignupActions {
         location.href = '/';
       })
       .catch((resp) => {
-        this.actions.signupFailure(resp.data.fields);
+        this.actions.signupFailure(resp.data);
       });
   }
 }
