@@ -14,22 +14,26 @@ module.exports = {
    * Log in.
    */
   login: function *() {
-    this.validate('username').isRequired();
-    this.validate('password').isRequired();
+    this.validate('email').required();
+    this.validate('password').required();
     this.assert(!this.fieldErrors, 400, { fields: this.fieldErrors });
+
+    // Validate the existence of an account for the given email address.
+    const existingUser = yield User.findOne({
+      email: this.request.body.email.toLowerCase()
+    });
+    this.assert(existingUser, 400, 'No account exists for that email address.');
 
     const _this = this;
     yield* passport.authenticate('local', function *(err, user) {
       if (err) {
-        throw err;
+        _this.throw(err);
       }
 
-      if (user === false) {
-        _this.status = 401;
-      } else {
-        yield _this.login(user);
-        _this.body = user;
-      }
+      _this.assert(user, 401, 'Invalid password.');
+
+      yield _this.login(user);
+      _this.body = user;
     }).call(this);
   },
 
@@ -46,18 +50,20 @@ module.exports = {
    * Sign up the requested new user and log them in.
    */
   signup: function *() {
-    this.validate('username').isRequired();
-    this.validate('password').isRequired();
+    this.validate('email').required().notEmpty().email();
+    this.validate('first').notEmpty().required();
+    this.validate('last').required().notEmpty();
+    this.validate('password').required().notEmpty();
     this.assert(!this.fieldErrors, 400, { fields: this.fieldErrors });
 
-    // Validate that an existing user with that username does not already exist.
-    const existingUser = yield User.findOne({
-      username: this.request.body.username
-    });
+    const body = this.request.body;
 
-    this.assert(!existingUser, 400, 'A user with that username already exists.');
+    // Validate that an existing user with that email does not already exist.
+    const existingUser = yield User.findOne({ email: body.email.toLowerCase() });
+    this.assert(!existingUser, 400, 'An account already exists for that email address.');
 
-    let newUser = new User(this.request.body);
+    // Create the new user, save them, log in, and return as response body.
+    let newUser = new User(body);
     newUser = yield newUser.save();
     yield this.login(newUser);
     this.body = newUser;

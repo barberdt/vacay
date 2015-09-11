@@ -5,17 +5,22 @@ const co = require('co');
 const createSchema = require('../utils/createSchema');
 const mongoose = require('mongoose');
 
+
+const emailRe = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
 /**
  * The document schema for db.users.
  */
 const UserSchema = createSchema({
-  // @TODO use an email address instead of a username
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
+    match: emailRe,
     lowercase: true
   },
+  first: { type: String, required: true, maxlength: 35 },
+  last: { type: String, required: true, maxlength: 35 },
   password: { type: String, required: true, hideJSON: true }
 });
 
@@ -63,17 +68,17 @@ UserSchema.methods.passwordMatches = function *(candidatePassword) {
 };
 
 /**
- * Verify the given password against the user matching the given username.
+ * Verify the given password against the user matching the given email.
  *
- * @param {String} username - The username for the user to verify with.
+ * @param {String} email - The email for the user to verify with.
  * @param {String} password - The candidate password to verify.
  * @return {Object} The matching user, if the password was verified.
  */
-UserSchema.statics.verifyPassword = function *(username, password) {
-  const user = yield this.findOne({ username: username });
+UserSchema.statics.verifyPassword = function *(email, password) {
+  const user = yield this.findOne({ email: email });
 
   if (!user) {
-    throw new Error(`Could not find user with username ${username}.`);
+    throw new Error(`Could not find user with email ${email}.`);
   }
 
   if (yield user.passwordMatches(password)) {

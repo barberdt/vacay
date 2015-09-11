@@ -8,15 +8,15 @@ const User = mongoose.model('User');
 
 /**
  * Authentication strategy implementation for passport. Authenticate the
- * given password against the user matching the given username.
+ * given password against the user matching the given email.
  *
- * @param {String} username - The username of the user to authenticate.
+ * @param {String} email - The email of the user to authenticate.
  * @param {String} password - The candidate password to authenticate with.
  * @param {Function} done - The function to call after completing authentication.
  */
-module.exports = function(username, password, done) {
+module.exports = function(email, password, done) {
   const verifyPassword = function *() {
-    return yield User.verifyPassword(username, password);
+    return yield User.verifyPassword(email, password);
   };
 
   co(verifyPassword)

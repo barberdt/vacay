@@ -12,7 +12,7 @@ import Input from 'components/formFields/Input';
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: null, password: null }
+    this.state = { email: null, first: null, last: null, password: null }
   }
 
   /**
@@ -36,26 +36,41 @@ export default class Signup extends React.Component {
 
   render() {
     const { errorMessage, fieldErrors } = this.props;
-    const { username, password } = this.state;
+    const { email, first, last, password } = this.state;
+    const onChange = this.onChange.bind(this);
 
     return (
       <div>
         {errorMessage && <div>{errorMessage}</div>}
         <form role="form" onSubmit={this.signup.bind(this)}>
           <Input
-            placeholder="Username"
-            name="username"
-            value={username}
-            onChange={this.onChange.bind(this)}
-            errors={fieldErrors ? fieldErrors.get('username') : null}
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            error={fieldErrors ? fieldErrors.get('email') : null}
+          />
+          <Input
+            placeholder="First"
+            name="first"
+            value={first}
+            onChange={onChange}
+            error={fieldErrors ? fieldErrors.get('first') : null}
+          />
+          <Input
+            placeholder="Last"
+            name="last"
+            value={last}
+            onChange={onChange}
+            error={fieldErrors ? fieldErrors.get('last') : null}
           />
           <Input
             type="password"
             placeholder="Password"
             name="password"
             value={password}
-            onChange={this.onChange.bind(this)}
-            errors={fieldErrors ? fieldErrors.get('password') : null}
+            onChange={onChange}
+            error={fieldErrors ? fieldErrors.get('password') : null}
           />
           <button type="Submit">Sign Up</button>
         </form>

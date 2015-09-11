@@ -10,12 +10,12 @@ class LoginActions {
   /**
    * Make a login request. Void dispatch.
    *
-   * @param {String} username - The username to log in with.
+   * @param {String} email - The email to log in with.
    * @param {String} password - The password to log in with.
    */
-  login(username, password) {
+  login(email, password) {
     this.dispatch();
-    login(username, password)
+    login(email, password)
       .then(() => location.href = '/');
   }
 }

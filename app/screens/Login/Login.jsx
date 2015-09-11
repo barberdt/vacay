@@ -9,7 +9,7 @@ import LoginActions from './actions/LoginActions';
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: null, password: null };
+    this.state = { email: null, password: null };
   }
 
   /**
@@ -19,8 +19,8 @@ export default class extends React.Component {
    */
   login(e) {
     e.preventDefault();
-    const { username, password } = this.state;
-    LoginActions.login(username, password);
+    const { email, password } = this.state;
+    LoginActions.login(email, password);
   }
 
   onChange(e) {
@@ -28,15 +28,15 @@ export default class extends React.Component {
   }
 
   render() {
-    const { username, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <form role="form" onSubmit={this.login.bind(this)}>
         <input
           type="text"
-          placeholder="Username"
-          name="username"
-          value={username}
+          placeholder="Email"
+          name="email"
+          value={email}
           onChange={this.onChange.bind(this)}
         />
         <input

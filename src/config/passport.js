@@ -41,5 +41,5 @@ const deserializeUser = function(id, done) {
 module.exports = function(passport) {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
-  passport.use(new LocalStrategy(authenticateUser));
+  passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));
 };

@@ -1,4 +1,3 @@
-import { List } from 'immutable';
 import React, { PropTypes } from 'react/addons';
 
 import FormField from './FormField';
@@ -9,10 +8,10 @@ import FormField from './FormField';
  */
 export default class Input extends React.Component {
   render() {
-    const { name, errors, type, placeholder, value, onChange } = this.props;
+    const { name, error, type, placeholder, value, onChange } = this.props;
 
     return (
-      <FormField name={name} errors={errors}>
+      <FormField name={name} error={error}>
         <input
           type={type}
           placeholder={placeholder}
@@ -27,9 +26,9 @@ export default class Input extends React.Component {
 
 Input.propTypes = {
   /**
-   * The error strings for the field.
+   * The error message for the field.
    */
-  errors: PropTypes.instanceOf(List),
+  error: PropTypes.string,
   /**
    * The name of the field.
    */
