@@ -1,5 +1,5 @@
 # node modules
 node_modules
 
-# statics
-src/static/js/*
+# built public statics
+public/js/*

@@ -61,6 +61,6 @@ module.exports = (app, passport) => {
     yield next;
   });
 
-  // Static serving
-  app.use(serve(`${appConfig.root}/src/static`));
+  // Public static serving for dev env
+  app.use(serve(`${appConfig.root}/public`));
 };

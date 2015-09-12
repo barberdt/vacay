@@ -9,7 +9,7 @@ module.exports = {
     signup: './screens/Signup/index'
   },
   output: {
-    path: __dirname + '/src/static/js',
+    path: __dirname + '/public/js',
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
