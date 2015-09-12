@@ -15,7 +15,7 @@ const views = require('co-views');
  * @param {Object} app - The Koa app instance.
  * @param {Object} passport - The configured passport instance.
  */
-module.exports = function(app, passport) {
+module.exports = (app, passport) => {
   app.name = appConfig.name;
   app.keys = appConfig.keys;
 
@@ -26,10 +26,7 @@ module.exports = function(app, passport) {
     } catch (error) {
       const status = error.status || 500;
       const message = error.message || 'Internal server error.';
-      const body = {
-        status: status,
-        message: message
-      };
+      const body = { status, message };
 
       if (error.fields) {
         body.fields = error.fields;
@@ -57,7 +54,7 @@ module.exports = function(app, passport) {
 
   // View rendering
   app.use(function *(next) {
-    this.render = views(appConfig.root + '/src/views', {
+    this.render = views(`${appConfig.root}/src/views`, {
       map: { html: 'swig' },
       cache: 'memory',
     });
@@ -65,5 +62,5 @@ module.exports = function(app, passport) {
   });
 
   // Static serving
-  app.use(serve(appConfig.root + '/src/static'));
+  app.use(serve(`${appConfig.root}/src/static`));
 };

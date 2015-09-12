@@ -12,7 +12,7 @@ module.exports = {
    */
   index: function *() {
     this.body = yield this.render('index', {
-      commonsScriptUrl: commonsScriptUrl,
+      commonsScriptUrl,
       scriptUrl: '/js/vacay.js'
     });
   },
@@ -22,7 +22,7 @@ module.exports = {
    */
   login: function *() {
     this.body = yield this.render('login', {
-      commonsScriptUrl: commonsScriptUrl,
+      commonsScriptUrl,
       scriptUrl: '/js/login.js'
     });
   },
@@ -32,7 +32,7 @@ module.exports = {
    */
   signup: function *() {
     this.body = yield this.render('signup', {
-      commonsScriptUrl: commonsScriptUrl,
+      commonsScriptUrl,
       scriptUrl: '/js/signup.js'
     });
   }

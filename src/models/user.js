@@ -33,15 +33,13 @@ UserSchema.pre('save', function(done) {
   try {
     if (!this.isModified('password')) {
       done();
+      return;
     }
 
     co.wrap(this.encryptPassword).call(this)
-      .then(function() {
-        done();
-      })
-      .catch(function(error) {
-        done(error);
-      });
+      .then(() => done())
+      .catch((error) => done(error));
+
   } catch (error) {
     done(error);
   }
@@ -75,7 +73,7 @@ UserSchema.methods.passwordMatches = function *(candidatePassword) {
  * @return {Object} The matching user, if the password was verified.
  */
 UserSchema.statics.verifyPassword = function *(email, password) {
-  const user = yield this.findOne({ email: email });
+  const user = yield this.findOne({ email });
 
   if (!user) {
     throw new Error(`Could not find user with email ${email}.`);

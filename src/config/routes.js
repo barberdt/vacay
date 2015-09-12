@@ -16,7 +16,7 @@ const tripController = controllers.tripController;
  *
  * @param {Object} app - The Koa app instance.
  */
-module.exports = function(app) {
+module.exports = (app) => {
   const router = new Router();
 
   // Views

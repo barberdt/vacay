@@ -5,8 +5,4 @@ const tripController = require('./trip');
 const viewController = require('./view');
 
 
-module.exports = {
-  viewController: viewController,
-  authController: authController,
-  tripController: tripController
-};
+module.exports = { viewController, authController, tripController };

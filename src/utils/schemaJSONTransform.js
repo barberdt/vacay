@@ -4,10 +4,10 @@ const get = require('lodash/object/get');
 
 
 // @TODO docs
-const getHidePathnames = function(schema) {
+const getHidePathnames = (schema) => {
   const pathnames = [];
 
-  schema.eachPath(function(pathname, schemaType) {
+  schema.eachPath((pathname, schemaType) => {
     if (get(schemaType, ['options', 'hideJSON'])) {
       pathnames.push(pathname);
     }
@@ -17,7 +17,7 @@ const getHidePathnames = function(schema) {
 };
 
 // @TODO docs
-const transformId = function(ret) {
+const transformId = (ret) => {
   if (!ret.id && ret._id) {
     ret.id = ret._id;
   }
@@ -26,8 +26,8 @@ const transformId = function(ret) {
 };
 
 // @TODO docs
-const hideFields = function(ret, hidePathnames) {
-  hidePathnames.forEach(function(pathname) {
+const hideFields = (ret, hidePathnames) => {
+  hidePathnames.forEach((pathname) => {
     const split = pathname.split('.');
     const propName = split[split.length - 1];
     const pathParts = split.slice(0, split.length -1);
@@ -49,14 +49,14 @@ const hideFields = function(ret, hidePathnames) {
  *
  * @param {Object} schema - The schema to alter the JSON transform for.
  */
-module.exports = function(schema) {
+module.exports = (schema) => {
   const options = schema.options;
   const existingOption = options.toJSON;
   const existingTransform = existingOption ? existingOption.transform : null;
 
   const hidePathnames = getHidePathnames(schema);
 
-  const newTransform = function(doc, ret, options) {
+  const newTransform = (doc, ret, options) => {
     if (existingTransform) {
       existingTransform(doc, ret, options);
     }

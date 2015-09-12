@@ -13,9 +13,7 @@ const User = mongoose.model('User');
  * @param {Object} user - The user being seralized.
  * @param {Function} done - The function to call when serialization is done.
  */
-const serializeUser = function(user, done) {
-  done(null, user._id);
-};
+const serializeUser = (user, done) => done(null, user._id);
 
 /**
  * Deserialize the user for incoming requests.
@@ -23,14 +21,10 @@ const serializeUser = function(user, done) {
  * @param {String} id - The user's id.
  * @param {Function} done - The function to call when the deserialization is done.
  */
-const deserializeUser = function(id, done) {
+const deserializeUser = (id, done) => {
   User.findById(id)
-    .then(function(user) {
-      done(null, user);
-    })
-    .catch(function(error) {
-      done(error, null);
-    });
+    .then((user) => done(null, user))
+    .catch((error) => done(error, null));
 };
 
 /**
@@ -38,7 +32,7 @@ const deserializeUser = function(id, done) {
  *
  * @param {Object} passport - The passport instance to configure.
  */
-module.exports = function(passport) {
+module.exports = (passport) => {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));

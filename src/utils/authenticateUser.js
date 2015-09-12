@@ -14,16 +14,12 @@ const User = mongoose.model('User');
  * @param {String} password - The candidate password to authenticate with.
  * @param {Function} done - The function to call after completing authentication.
  */
-module.exports = function(email, password, done) {
+module.exports = (email, password, done) => {
   const verifyPassword = function *() {
     return yield User.verifyPassword(email, password);
   };
 
   co(verifyPassword)
-    .then(function(user) {
-      done(null, user);
-    })
-    .catch(function(error) {
-      done(error, null);
-    });
+    .then((user) => done(null, user))
+    .catch((error) => done(error, null));
 };

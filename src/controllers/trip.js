@@ -24,7 +24,7 @@ module.exports = {
    */
   getAll: function *() {
     const trips = yield Trip.find();
-    this.body = { trips: trips };
+    this.body = { trips };
   },
 
   /**

@@ -14,8 +14,8 @@ mongoose.connect(appConfig.mongoUrl);
 // Load models
 const modelsPath = appConfig.root + '/src/models';
 
-fs.readdirSync(modelsPath).forEach(function(file) {
-  if (~file.indexOf('js')) {
+fs.readdirSync(modelsPath).forEach((file) => {
+  if (file.includes('js')) {
     require(`${modelsPath}/${file}`);
   }
 });
