@@ -18,12 +18,8 @@ class VacayActions {
    */
   reset() {
     TripStore.fetch()
-      .then(() => {
-        this.actions.resetSuccess();
-      })
-      .catch(() => {
-        this.actions.resetFaliure();
-      });
+      .then(() => this.actions.resetSuccess())
+      .catch(() => this.actions.resetFaliure());
   }
 
   // @TODO docs

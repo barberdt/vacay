@@ -54,9 +54,7 @@ class TripStore {
       return Promise.resolve(trips);
     } else {
       return TripActions.load()
-        .then(() => {
-          return Promise.resolve(this.getState());
-        });
+        .then(() => Promise.resolve(this.getState()))
     }
   }
 }

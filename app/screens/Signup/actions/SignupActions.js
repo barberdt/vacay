@@ -27,9 +27,7 @@ class SignupActions {
         this.actions.signupSuccess();
         location.href = '/';
       })
-      .catch((resp) => {
-        this.actions.signupFailure(resp.data);
-      });
+      .catch((resp) => this.actions.signupFailure(resp.data));
   }
 }
 
