@@ -5,7 +5,10 @@
   "author": "barberdt",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development ./node_modules/.bin/nodemon --debug server.js"
+    "build": "webpack",
+    "inspect": "node-inspector",
+    "start": "NODE_ENV=development nodemon --debug server.js",
+    "watch": "webpack --watch"
   },
   "dependencies": {
     "alt": "^0.17.1",
@@ -31,6 +34,7 @@
     "koa-static": "^1.4.9",
     "lodash": "^3.10.1",
     "mongoose": "^4.1.3",
+    "node-inspector": "^0.12.3",
     "nodemon": "^1.4.1",
     "passport-local": "^1.0.0",
     "react": "^0.13.3",
