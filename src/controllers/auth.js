@@ -19,19 +19,13 @@ module.exports = {
     this.assert(!this.fieldErrors, 400, { fields: this.fieldErrors });
 
     // Validate the existence of an account for the given email address.
-    const existingUser = yield User.findOne({
-      email: this.request.body.email.toLowerCase()
-    });
+    const email = this.request.body.email.toLowerCase();
+    const existingUser = yield User.findOne({ email });
     this.assert(existingUser, 400, 'No account exists for that email address.');
 
     const _this = this;
     yield* passport.authenticate('local', function *(err, user) {
-      if (err) {
-        _this.throw(err);
-      }
-
-      _this.assert(user, 401, 'Invalid password.');
-
+      _this.assert(!err && user, 401, 'Invalid password.');
       yield _this.login(user);
       _this.body = user;
     }).call(this);
