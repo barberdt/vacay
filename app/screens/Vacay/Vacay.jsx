@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as IMap } from 'immutable';
 import React, { PropTypes } from 'react/addons';
 import { Link, RouteHandler } from 'react-router';
 
@@ -46,5 +46,5 @@ Vacay.propTypes = {
   /**
    * The trips to display.
    */
-  trips: PropTypes.instanceOf(ImmutableMap)
+  trips: PropTypes.instanceOf(IMap)
 }

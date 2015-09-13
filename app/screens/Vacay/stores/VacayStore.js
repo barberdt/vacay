@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as IMap } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
@@ -12,7 +12,7 @@ import TripStore from 'stores/TripStore';
  */
 class VacayStore {
   constructor() {
-    this.state = ImmutableMap({
+    this.state = IMap({
       isLoading: false,
       trips: null
     });
@@ -27,7 +27,7 @@ class VacayStore {
    * Handler for VacayActions.reset. Set the store to an empty and loading state.
    */
   onReset() {
-    this.setState(ImmutableMap({
+    this.setState(IMap({
       isLoading: true,
       trips: null
     }));

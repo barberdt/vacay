@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as IMap } from 'immutable';
 import React from 'react/addons';
 import { Link, RouteHandler } from 'react-router';
 
@@ -7,7 +7,7 @@ import TripActions from 'actions/TripActions';
 
 export default React.createClass({
   handleClick() {
-    TripActions.create(ImmutableMap({
+    TripActions.create(IMap({
       name: 'Foobar'
     }));
   },

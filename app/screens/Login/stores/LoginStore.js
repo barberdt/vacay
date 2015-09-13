@@ -2,33 +2,33 @@ import { fromJS, Map as IMap } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
-import SignupActions from '../actions/SignupActions';
+import LoginActions from '../actions/LoginActions';
 
 
 /**
- * The store for the Signup view.
+ * The store for the Login view.
  */
-class SignupStore {
+class MyStore {
   constructor() {
     this.state = IMap({ errorMessage: null, fieldErrors: null });
-    this.bindActions(SignupActions);
+    this.bindActions(LoginActions);
   }
 
   /**
-   * Handler for SignupActions.signup. Null out errors.
+   * Handler for LoginActions.login. Null out errors.
    */
-  onSignup() {
+  onLogin() {
     this.setState(this.state.merge({ errorMessage: null, fieldErrors: null }));
   }
 
   /**
-   * Handler for SignupActions.signupFailure. Set the given error state.
+   * Handler for LoginActions.loginFailure. Set the given error state.
    *
-   * @param {Object} body - The error response body from signup failure.
+   * @param {Object} body - The error response body from login failure.
    * @param {String} body.message - The overall error message.
    * @param {Object} body.fields - The field errors keyed by field name.
    */
-  onSignupFailure(body) {
+  onLoginFailure(body) {
     const { message, fields } = body;
 
     if (fields) {
@@ -39,4 +39,4 @@ class SignupStore {
   }
 }
 
-export default alt.createStore(immutableStore(SignupStore), 'SignupStore');
+export default alt.createStore(immutableStore(MyStore), 'MyStore');

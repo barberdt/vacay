@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as IMap } from 'immutable';
 import React, { PropTypes } from 'react/addons';
 
 import SignupActions from './actions/SignupActions';
@@ -87,5 +87,5 @@ Signup.propTypes = {
   /**
    * The field errors for the signup form.
    */
-  fieldErrors: PropTypes.instanceOf(ImmutableMap)
+  fieldErrors: PropTypes.instanceOf(IMap)
 };

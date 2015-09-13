@@ -1,8 +1,10 @@
 import React from 'react/addons';
 
 import connectToStores from 'alt/utils/connectToStores';
-import Signup from './Signup';
 import SignupStore from './stores/SignupStore';
+
+import Signup from './Signup';
+
 
 const ConnectedSignup = connectToStores({
   getStores() {

@@ -1,4 +1,4 @@
-import { fromJS, Map as ImmutableMap } from 'immutable';
+import { fromJS, Map as IMap } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
@@ -10,7 +10,7 @@ import TripActions from 'actions/TripActions';
  */
 class TripStore {
   constructor() {
-    this.state = ImmutableMap();
+    this.state = IMap();
 
     this.bindActions(TripActions);
     this.exportPublicMethods({
@@ -24,7 +24,7 @@ class TripStore {
    * @param {Object} trip - The created trip.
    */
   onCreateSuccess(trip) {
-    this.setState(this.state.set(trip.id, ImmutableMap(trip)));
+    this.setState(this.state.set(trip.id, IMap(trip)));
   }
 
   /**
