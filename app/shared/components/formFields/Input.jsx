@@ -13,6 +13,7 @@ export default class Input extends React.Component {
     return (
       <FormField name={name} error={error}>
         <input
+          style={this.props.style}
           type={type}
           placeholder={placeholder}
           name={name}
