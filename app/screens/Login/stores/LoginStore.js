@@ -4,6 +4,8 @@ import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
 import LoginActions from '../actions/LoginActions';
 
+import reduceFieldErrors from 'utils/reduceFieldErrors';
+
 
 /**
  * The store for the Login view.
@@ -24,15 +26,15 @@ class MyStore {
   /**
    * Handler for LoginActions.loginFailure. Set the given error state.
    *
-   * @param {Object} body - The error response body from login failure.
-   * @param {String} body.message - The overall error message.
-   * @param {Object} body.fields - The field errors keyed by field name.
+   * @param {Object} data - The dispatched data.
+   * @param {String} data.message - The overall error message.
+   * @param {Object} data.fields - The field errors keyed by field name.
    */
-  onLoginFailure(body) {
-    const { message, fields } = body;
+  onLoginFailure(data) {
+    const { message, fields } = data;
 
     if (fields) {
-      this.setState(this.state.set('fieldErrors', fromJS(fields)));
+      this.setState(this.state.set('fieldErrors', fromJS(reduceFieldErrors(fields))));
     } else {
       this.setState(this.state.set('errorMessage', message));
     }
