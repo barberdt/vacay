@@ -24,10 +24,6 @@ export default class FormField extends React.Component {
 
 FormField.propTypes = {
   /**
-   * Renderable children.
-   */
-  children: PropTypes.node.isRequired,
-  /**
    * The error message for the field.
    */
   error: PropTypes.string,

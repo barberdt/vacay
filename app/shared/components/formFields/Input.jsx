@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import React, { PropTypes } from 'react/addons';
 
 import FormField from './FormField';
@@ -6,6 +7,7 @@ import FormField from './FormField';
 /**
  * The form field for text inputs.
  */
+@Radium
 export default class Input extends React.Component {
   render() {
     const { name, error, type, placeholder, value, onChange } = this.props;
@@ -13,7 +15,6 @@ export default class Input extends React.Component {
     return (
       <FormField name={name} error={error}>
         <input
-          style={this.props.style}
           type={type}
           placeholder={placeholder}
           name={name}

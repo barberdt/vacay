@@ -1,5 +1,4 @@
 import { Map as IMap } from 'immutable';
-import Radium from 'radium';
 import React, { PropTypes } from 'react/addons';
 
 import SignupActions from './actions/SignupActions';
@@ -10,7 +9,6 @@ import Input from 'components/formFields/Input';
 /**
  * The signup component.
  */
-@Radium
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -40,20 +38,12 @@ class Signup extends React.Component {
     const { errorMessage, fieldErrors } = this.props;
     const { email, first, last, password } = this.state;
     const onChange = this.onChange.bind(this);
-    const firstStyle = {
-      fontSize: 20
-    };
-
-    const secondStyle = {
-      color: 'blue'
-    };
 
     return (
       <div>
         {errorMessage && <div>{errorMessage}</div>}
         <form role="form" onSubmit={this.signup.bind(this)}>
           <Input
-            style={[firstStyle, secondStyle]}
             placeholder="Email"
             name="email"
             value={email}
