@@ -2,7 +2,6 @@
 
 const appConfig = require('./app');
 const bodyParser = require('koa-body');
-// const fieldValidate = require('koa-field-validate');
 const validate = require('koa-validate');
 const redisStore = require('koa-redis');
 const serve = require('koa-static');
@@ -47,7 +46,6 @@ module.exports = (app, passport) => {
   app.use(bodyParser());
 
   // Field validation
-  // app.use(fieldValidate());
   app.use(validate());
 
   // Passport
