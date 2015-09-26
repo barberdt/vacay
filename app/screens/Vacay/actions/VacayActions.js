@@ -25,7 +25,7 @@ class VacayActions {
   // @TODO docs
   logout() {
     post('/auth/logout')
-      .then(() => location.href='/login');
+      .then(() => location.href = '/login');
   }
 }
 

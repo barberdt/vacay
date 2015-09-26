@@ -52,10 +52,9 @@ class TripStore {
 
     if (trips.size > 0) {
       return Promise.resolve(trips);
-    } else {
-      return TripActions.load()
-        .then(() => Promise.resolve(this.getState()))
     }
+
+    return TripActions.load().then(() => Promise.resolve(this.getState()));
   }
 }
 

@@ -47,4 +47,4 @@ Vacay.propTypes = {
    * The trips to display.
    */
   trips: PropTypes.instanceOf(IMap)
-}
+};

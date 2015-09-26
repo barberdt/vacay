@@ -12,7 +12,7 @@ import Input from 'components/formFields/Input';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: null, first: null, last: null, password: null }
+    this.state = { email: null, first: null, last: null, password: null };
   }
 
   /**
