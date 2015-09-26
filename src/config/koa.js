@@ -29,7 +29,12 @@ module.exports = (app, passport) => {
       const body = { status, message };
 
       if (error.fields) {
-        body.fields = error.fields;
+        // Properly format field errors generator by koa-validate.
+        const fields = error.fields.reduce((current, field) => {
+          return Object.assign(current, field);
+        }, {});
+
+        body.fields = fields;
       }
 
       this.status = status;
@@ -56,7 +61,7 @@ module.exports = (app, passport) => {
   app.use(function *(next) {
     this.render = views(`${appConfig.root}/src/views`, {
       map: { html: 'swig' },
-      cache: 'memory',
+      cache: 'memory'
     });
     yield next;
   });

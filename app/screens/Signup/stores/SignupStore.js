@@ -4,8 +4,6 @@ import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
 import SignupActions from '../actions/SignupActions';
 
-import reduceFieldErrors from 'utils/reduceFieldErrors';
-
 
 /**
  * The store for the Signup view.
@@ -34,7 +32,7 @@ class SignupStore {
     const { message, fields } = data;
 
     if (fields) {
-      this.setState(this.state.set('fieldErrors', fromJS(reduceFieldErrors(fields))));
+      this.setState(this.state.set('fieldErrors', fromJS(fields)));
     } else {
       this.setState(this.state.set('errorMessage', message));
     }
