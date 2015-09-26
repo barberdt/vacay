@@ -8,7 +8,8 @@
     "build": "webpack",
     "inspect": "node-inspector",
     "start": "NODE_ENV=development nodemon --debug server.js",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint": "eslint src"
   },
   "dependencies": {
     "alt": "^0.17.1",
@@ -21,7 +22,7 @@
     "co": "^4.6.0",
     "co-views": "^2.0.0",
     "eslint": "^1.5.1",
-    "eslint-config-barberdt": "^0.0.2",
+    "eslint-config-barberdt": "0.0.4",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.4.2",
     "immutable": "^3.7.4",

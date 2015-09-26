@@ -4,7 +4,7 @@ const authenticated = require('../middlewares/authenticated');
 const authenticatedView = require('../middlewares/authenticatedView');
 const unauthenticatedView = require('../middlewares/unauthenticatedView');
 const Router = require('koa-router');
-const controllers = require('../controllers')
+const controllers = require('../controllers');
 
 
 const viewController = controllers.viewController;

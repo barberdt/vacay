@@ -30,7 +30,7 @@ const hideFields = (ret, hidePathnames) => {
   hidePathnames.forEach((pathname) => {
     const split = pathname.split('.');
     const propName = split[split.length - 1];
-    const pathParts = split.slice(0, split.length -1);
+    const pathParts = split.slice(0, split.length - 1);
 
     if (ret.hasOwnProperty(propName)) {
       delete ret[propName];
@@ -56,9 +56,9 @@ module.exports = (schema) => {
 
   const hidePathnames = getHidePathnames(schema);
 
-  const newTransform = (doc, ret, options) => {
+  const newTransform = (doc, ret, transformOptions) => {
     if (existingTransform) {
-      existingTransform(doc, ret, options);
+      existingTransform(doc, ret, transformOptions);
     }
 
     delete ret.__v;

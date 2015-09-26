@@ -39,7 +39,6 @@ UserSchema.pre('save', function(done) {
     co.wrap(this.encryptPassword).call(this)
       .then(() => done())
       .catch((error) => done(error));
-
   } catch (error) {
     done(error);
   }

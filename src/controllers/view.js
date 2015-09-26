@@ -36,4 +36,4 @@ module.exports = {
       scriptUrl: '/js/signup.js'
     });
   }
-}
+};
