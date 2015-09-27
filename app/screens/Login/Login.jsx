@@ -1,15 +1,18 @@
 import { Map as IMap } from 'immutable';
+import Radium from 'radium';
 import React, { PropTypes } from 'react/addons';
 
 import LoginActions from './actions/LoginActions';
 
 import Input from 'components/formFields/Input';
+import style from './LoginStyle';
 
 
 /**
  * The login component.
  */
-export default class Login extends React.Component {
+@Radium
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: null, password: null };
@@ -26,6 +29,11 @@ export default class Login extends React.Component {
     LoginActions.login(email, password);
   }
 
+  /**
+   * Handler for changes to the form fields.
+   *
+   * @param {Event} e - The event emitted by the change.
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -36,7 +44,8 @@ export default class Login extends React.Component {
     const onChange = this.onChange.bind(this);
 
     return (
-      <div>
+      <div style={[style.container]}>
+        <div>
         {errorMessage && <div>{errorMessage}</div>}
         <form role="form" onSubmit={this.login.bind(this)}>
           <Input
@@ -56,6 +65,7 @@ export default class Login extends React.Component {
           />
           <button type="submit">Log In</button>
         </form>
+        </div>
       </div>
     );
   }
@@ -71,3 +81,5 @@ Login.propTypes = {
    */
   fieldErrors: PropTypes.instanceOf(IMap)
 };
+
+export default Login;
