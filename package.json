@@ -5,11 +5,12 @@
   "author": "barberdt",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "npm run copyNormalize && webpack",
     "inspect": "node-inspector",
-    "start": "NODE_ENV=development nodemon --debug server.js",
+    "start": "npm run copyNormalize && NODE_ENV=development nodemon --debug server.js",
     "watch": "webpack --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "copyNormalize": "cp node_modules/normalize.css/normalize.css ./public/css"
   },
   "dependencies": {
     "alt": "^0.17.1",
@@ -38,6 +39,7 @@
     "mongoose": "^4.1.3",
     "node-inspector": "^0.12.3",
     "nodemon": "^1.4.1",
+    "normalize.css": "^3.0.3",
     "passport-local": "^1.0.0",
     "radium": "^0.13.8",
     "react": "^0.13.3",
