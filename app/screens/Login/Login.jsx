@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react/addons';
 import LoginActions from './actions/LoginActions';
 
 import Input from 'components/formFields/Input';
+
 import style from './LoginStyle';
 
 
@@ -25,8 +26,8 @@ class Login extends React.Component {
    */
   login(e) {
     e.preventDefault();
-    const { email, password } = this.state;
-    LoginActions.login(email, password);
+    const { email, password } = this.props.fields.toObject();
+    LoginActions.login(email.get('value'), password.get('value'));
   }
 
   /**
@@ -35,36 +36,39 @@ class Login extends React.Component {
    * @param {Event} e - The event emitted by the change.
    */
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    LoginActions.updateField({ name, value });
   }
 
   render() {
-    const { errorMessage, fieldErrors } = this.props;
-    const { email, password } = this.state;
+    const { error, fields } = this.props;
+    const { email, password } = fields.toObject();
     const onChange = this.onChange.bind(this);
 
     return (
-      <div style={[style.container]}>
-        <div>
-        {errorMessage && <div>{errorMessage}</div>}
-        <form role="form" onSubmit={this.login.bind(this)}>
-          <Input
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('email') : null}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('password') : null}
-          />
-          <button type="submit">Log In</button>
-        </form>
+      <div style={style.container}>
+        <div style={style.formContainer}>
+          {error && <div>{error}</div>}
+          <form role="form" onSubmit={this.login.bind(this)}>
+            <Input
+              placeholder="Email"
+              autoComplete="email"
+              name="email"
+              value={email.get('value')}
+              onChange={onChange}
+              error={email.get('error')}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              autoComplete="current-password"
+              name="password"
+              value={password.get('value')}
+              onChange={onChange}
+              error={password.get('error')}
+            />
+            <button style={style.button} type="submit">Log In</button>
+          </form>
         </div>
       </div>
     );
@@ -73,13 +77,13 @@ class Login extends React.Component {
 
 Login.propTypes = {
   /**
-   * The overall error message to show.
+   * The overall error for the form.
    */
-  errorMessage: PropTypes.string,
+  error: PropTypes.string,
   /**
-   * The field errors for the login form.
+   * The field data, including each field's value and potential error.
    */
-  fieldErrors: PropTypes.instanceOf(IMap)
+  fields: PropTypes.instanceOf(IMap)
 };
 
 export default Login;

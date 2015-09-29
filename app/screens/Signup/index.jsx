@@ -12,8 +12,8 @@ const ConnectedSignup = connectToStores({
   },
 
   getPropsFromStores() {
-    const { errorMessage, fieldErrors } = SignupStore.getState().toObject();
-    return { errorMessage, fieldErrors };
+    const { error, fields } = SignupStore.getState().toObject();
+    return { error, fields };
   }
 }, Signup);
 

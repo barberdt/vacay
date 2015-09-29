@@ -13,8 +13,8 @@ const ConnectedLogin = connectToStores({
   },
 
   getPropsFromStores() {
-    const { errorMessage, fieldErrors } = LoginStore.getState().toObject();
-    return { errorMessage, fieldErrors };
+    const { error, fields } = LoginStore.getState().toObject();
+    return { error, fields };
   }
 }, Login);
 

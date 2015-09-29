@@ -1,4 +1,4 @@
-import { fromJS, Map as IMap } from 'immutable';
+import { fromJS } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
@@ -10,31 +10,61 @@ import SignupActions from '../actions/SignupActions';
  */
 class SignupStore {
   constructor() {
-    this.state = IMap({ errorMessage: null, fieldErrors: null });
+    this.state = fromJS({
+      error: null,
+      fields: {
+        email: {},
+        first: {},
+        last: {},
+        password: {}
+      }
+    });
+
     this.bindActions(SignupActions);
+  }
+
+  /**
+   * Handler for SignupActions.updateField. Update the store's field entry.
+   *
+   * @param {Object} data - The dispatched data.
+   * @param {String} data.name - The field's name.
+   * @param {*} data.value - The field's value.
+   */
+  onUpdateField(data) {
+    const { name, value } = data;
+    const updatedField = fromJS({ value, error: null });
+    this.setState(this.state.setIn(['fields', name], updatedField));
   }
 
   /**
    * Handler for SignupActions.signup. Null out errors.
    */
   onSignup() {
-    this.setState(this.state.merge({ errorMessage: null, fieldErrors: null }));
+    let fields = this.state.get('fields');
+    fields = fields.map((field) => field.set('error', null));
+
+    this.setState(this.state.merge({
+      error: null,
+      fields: fields
+    }));
   }
 
   /**
    * Handler for SignupActions.signupFailure. Set the given error state.
    *
    * @param {Object} data - The dispatched data.
-   * @param {String} data.message - The overall error message.
-   * @param {Object} data.fields - The field errors keyed by field name.
+   * @param {String} data.error - The overall error message for the form.
+   * @param {Object} data.fieldErrors - The field errors keyed by field name.
    */
   onSignupFailure(data) {
-    const { message, fields } = data;
+    const { error, fieldErrors } = data;
 
-    if (fields) {
-      this.setState(this.state.set('fieldErrors', fromJS(fields)));
+    if (fieldErrors) {
+      let fields = this.state.get('fields');
+      fields = fields.map((field, name) => field.set('error', fieldErrors[name]));
+      this.setState(this.state.set('fields', fields));
     } else {
-      this.setState(this.state.set('errorMessage', message));
+      this.setState(this.state.set('error', error));
     }
   }
 }

@@ -8,7 +8,7 @@ import { login } from '../utils/loginAPI';
  */
 class LoginActions {
   constructor() {
-    this.generateActions('loginFailure');
+    this.generateActions('updateField', 'loginFailure');
   }
 
   /**
@@ -21,7 +21,10 @@ class LoginActions {
     this.dispatch();
     login(email, password)
       .then(() => location.href = '/')
-      .catch((resp) => this.actions.loginFailure(resp.data));
+      .catch((resp) => {
+        const { message: error, fields: fieldErrors } = resp.data;
+        this.actions.loginFailure({ error, fieldErrors });
+      });
   }
 }
 

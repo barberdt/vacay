@@ -1,14 +1,18 @@
 import { Map as IMap } from 'immutable';
+import Radium from 'radium';
 import React, { PropTypes } from 'react/addons';
 
 import SignupActions from './actions/SignupActions';
 
 import Input from 'components/formFields/Input';
 
+import style from './SignupStyle';
+
 
 /**
  * The signup component.
  */
+@Radium
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +26,13 @@ class Signup extends React.Component {
    */
   signup(e) {
     e.preventDefault();
-    SignupActions.signup(this.state);
+    const { email, first, last, password } = this.props.fields.toObject();
+    SignupActions.signup({
+      email: email.get('value'),
+      first: first.get('value'),
+      last: last.get('value'),
+      password: password.get('value')
+    });
   }
 
   /**
@@ -31,49 +41,56 @@ class Signup extends React.Component {
    * @param {Object} e - The event emitted by the changed field.
    */
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    SignupActions.updateField({ name, value });
   }
 
   render() {
-    const { errorMessage, fieldErrors } = this.props;
-    const { email, first, last, password } = this.state;
+    const { error, fields } = this.props;
+    const { email, first, last, password } = fields.toObject();
     const onChange = this.onChange.bind(this);
 
     return (
-      <div>
-        {errorMessage && <div>{errorMessage}</div>}
-        <form role="form" onSubmit={this.signup.bind(this)}>
-          <Input
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('email') : null}
-          />
-          <Input
-            placeholder="First"
-            name="first"
-            value={first}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('first') : null}
-          />
-          <Input
-            placeholder="Last"
-            name="last"
-            value={last}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('last') : null}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            error={fieldErrors ? fieldErrors.get('password') : null}
-          />
-          <button type="Submit">Sign Up</button>
-        </form>
+      <div style={style.container}>
+        <div style={style.formContainer}>
+          {error && <div>{error}</div>}
+          <form role="form" onSubmit={this.signup.bind(this)}>
+            <Input
+              placeholder="Email"
+              autoComplete="email"
+              name="email"
+              value={email.get('value')}
+              onChange={onChange}
+              error={email.get('error')}
+            />
+            <Input
+              placeholder="First"
+              autoComplete="given-name"
+              name="first"
+              value={first.get('value')}
+              onChange={onChange}
+              error={first.get('error')}
+            />
+            <Input
+              placeholder="Last"
+              autoComplete="family-name"
+              name="last"
+              value={last.get('value')}
+              onChange={onChange}
+              error={last.get('error')}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              autoComplete="current-password"
+              name="password"
+              value={password.get('value')}
+              onChange={onChange}
+              error={password.get('error')}
+            />
+            <button style={style.button} type="Submit">Sign Up</button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -81,13 +98,13 @@ class Signup extends React.Component {
 
 Signup.propTypes = {
   /**
-   * The overall error message to show.
+   * The overall error for the form.
    */
-  errorMessage: PropTypes.string,
+  error: PropTypes.string,
   /**
-   * The field errors for the signup form.
+   * The field data, including each field's value and potential error.
    */
-  fieldErrors: PropTypes.instanceOf(IMap)
+  fields: PropTypes.instanceOf(IMap)
 };
 
 export default Signup;

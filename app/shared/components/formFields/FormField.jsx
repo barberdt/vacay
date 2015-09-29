@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react/addons';
 
+import style from './FormFieldStyle';
+
 
 /**
  * The base wrapper for form fields.
  */
 export default class FormField extends React.Component {
   renderError() {
-    const { error, name } = this.props;
-    return <div>{`${name} ${error}.`}</div>;
+    const { error } = this.props;
+    return <div style={style.error}>{`${error}`}</div>;
   }
 
   render() {

@@ -8,7 +8,7 @@ import { signup } from '../utils/signupAPI';
  */
 class SignupActions {
   constructor() {
-    this.generateActions('signupSuccess', 'signupFailure');
+    this.generateActions('updateField', 'signupFailure');
   }
 
   /**
@@ -23,11 +23,11 @@ class SignupActions {
   signup(user) {
     this.dispatch();
     signup(user)
-      .then(() => {
-        this.actions.signupSuccess();
-        location.href = '/';
-      })
-      .catch((resp) => this.actions.signupFailure(resp.data));
+      .then(() => location.href = '/')
+      .catch((resp) => {
+        const { message: error, fields: fieldErrors } = resp.data;
+        this.actions.signupFailure({ error, fieldErrors });
+      });
   }
 }
 

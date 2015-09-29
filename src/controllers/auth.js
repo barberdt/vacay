@@ -14,8 +14,8 @@ module.exports = {
    * Log in.
    */
   login: function *() {
-    this.checkBody('email').notEmpty('is required');
-    this.checkBody('password').notEmpty('is required');
+    this.checkBody('email').notEmpty('Required');
+    this.checkBody('password').notEmpty('Required');
     this.assert(!this.errors, 400, { fields: this.errors });
 
     // Validate the existence of an account for the given email address.
@@ -44,10 +44,10 @@ module.exports = {
    * Sign up the requested new user and log them in.
    */
   signup: function *() {
-    this.checkBody('email').notEmpty('is required').isEmail('must be a valid email address');
-    this.checkBody('first').notEmpty('is required');
-    this.checkBody('last').notEmpty('is required');
-    this.checkBody('password').notEmpty('is required');
+    this.checkBody('email').notEmpty('Required').isEmail('must be a valid email address');
+    this.checkBody('first').notEmpty('Required');
+    this.checkBody('last').notEmpty('Required');
+    this.checkBody('password').notEmpty('Required');
     this.assert(!this.errors, 400, { fields: this.errors });
 
     const body = this.request.body;

@@ -1,4 +1,4 @@
-import { fromJS, Map as IMap } from 'immutable';
+import { fromJS } from 'immutable';
 
 import alt from 'dispatchers/alt';
 import immutableStore from 'alt/utils/ImmutableUtil';
@@ -8,35 +8,63 @@ import LoginActions from '../actions/LoginActions';
 /**
  * The store for the Login view.
  */
-class MyStore {
+class LoginStore {
   constructor() {
-    this.state = IMap({ errorMessage: null, fieldErrors: null });
+    this.state = fromJS({
+      error: null,
+      fields: {
+        email: {},
+        password: {}
+      }
+    });
+
     this.bindActions(LoginActions);
+  }
+
+  /**
+   * Handler for LoginActions.updateField. Update the store's field entry.
+   *
+   * @param {Object} data - The dispatched data.
+   * @param {String} data.name - The field's name.
+   * @param {*} data.value - The field's value.
+   */
+  onUpdateField(data) {
+    const { name, value } = data;
+    const updatedField = fromJS({ value, error: null });
+    this.setState(this.state.setIn(['fields', name], updatedField));
   }
 
   /**
    * Handler for LoginActions.login. Null out errors.
    */
   onLogin() {
-    this.setState(this.state.merge({ errorMessage: null, fieldErrors: null }));
+    let fields = this.state.get('fields');
+    fields = fields.map((field) => field.set('error', null));
+
+    this.setState(this.state.merge({
+      error: null,
+      fields: fields
+    }));
   }
 
   /**
    * Handler for LoginActions.loginFailure. Set the given error state.
    *
    * @param {Object} data - The dispatched data.
-   * @param {String} data.message - The overall error message.
-   * @param {Object} data.fields - The field errors keyed by field name.
+   * @param {String} data.error - The overall error message for the form.
+   * @param {Object} data.fieldErrors - The field errors keyed by field name.
    */
   onLoginFailure(data) {
-    const { message, fields } = data;
+    const { error, fieldErrors } = data;
 
-    if (fields) {
-      this.setState(this.state.set('fieldErrors', fromJS(fields)));
+    if (fieldErrors) {
+      let fields = this.state.get('fields');
+      fields = fields.map((field, name) => field.set('error', fieldErrors[name]));
+      this.setState(this.state.set('fields', fields));
     } else {
-      this.setState(this.state.set('errorMessage', message));
+      this.setState(this.state.set('error', error));
     }
   }
 }
 
-export default alt.createStore(immutableStore(MyStore), 'MyStore');
+export default alt.createStore(immutableStore(LoginStore), 'LoginStore');
