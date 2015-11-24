@@ -9,7 +9,6 @@ import style from './InputStyle';
 /**
  * The form field for text inputs.
  */
-@Radium
 class Input extends React.Component {
   render() {
     const { name, error, ...props } = this.props;
@@ -46,4 +45,4 @@ Input.defaultProps = {
   type: 'text'
 };
 
-export default Input;
+export default Radium(Input);

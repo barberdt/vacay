@@ -1,12 +1,12 @@
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 
 module.exports = {
   context: __dirname + '/app',
   entry: {
-    vacay: './screens/Vacay/index',
-    login: './screens/Login/index',
-    signup: './screens/Signup/index'
+    vacay: ['babel-polyfill', './screens/Vacay/index'],
+    login: ['babel-polyfill', './screens/Login/index'],
+    signup: ['babel-polyfill', './screens/Signup/index']
   },
   output: {
     path: __dirname + '/public/js',
@@ -19,7 +19,7 @@ module.exports = {
     modulesDirectories: [
       'node_modules',
       'shared'
-    ],
+    ]
   },
   devtool: '#eval',
   module: {
@@ -32,13 +32,12 @@ module.exports = {
     ],
     loaders: [
       {
+        loader: 'babel-loader',
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
         query: {
-          optional: ['runtime'],
-          stage: 1,
-          cacheDirectory: true
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'stage-0', 'react']
         }
       }
     ]

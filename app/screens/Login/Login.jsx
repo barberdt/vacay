@@ -12,7 +12,6 @@ import style from './LoginStyle';
 /**
  * The login component.
  */
-@Radium
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -86,4 +85,4 @@ Login.propTypes = {
   fields: PropTypes.instanceOf(IMap)
 };
 
-export default Login;
+export default Radium(Login);

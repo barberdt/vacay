@@ -12,7 +12,6 @@ import style from './SignupStyle';
 /**
  * The signup component.
  */
-@Radium
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -107,4 +106,4 @@ Signup.propTypes = {
   fields: PropTypes.instanceOf(IMap)
 };
 
-export default Signup;
+export default Radium(Signup);

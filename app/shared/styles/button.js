@@ -8,7 +8,6 @@ export default {
   backgroundColor: '#4a90e2',
   color: '#fff',
   border: 'none',
-  boxShadow: '0 1px 2px 0 #aaa',
   ':focus': {
     outline: 'none'
   }
