@@ -1,8 +1,6 @@
-'use strict';
-
-const createSchema = require('../utils/createSchema');
 const mongoose = require('mongoose');
 
+const createSchema = require('../utils/createSchema');
 
 /**
  * The document schema for db.trips.

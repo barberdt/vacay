@@ -1,10 +1,8 @@
-'use strict';
-
 const bcrypt = require('bcrypt-as-promised');
 const co = require('co');
-const createSchema = require('../utils/createSchema');
 const mongoose = require('mongoose');
 
+const createSchema = require('../utils/createSchema');
 
 const emailRe = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 

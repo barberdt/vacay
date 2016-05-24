@@ -1,8 +1,6 @@
-'use strict';
-
 const mongoose = require('mongoose');
-const schemaJSONTransform = require('./schemaJSONTransform');
 
+const schemaJSONTransform = require('./schemaJSONTransform');
 
 /**
  * Method used to create all model schemas.

@@ -1,4 +1,4 @@
-'use strict';
+
 
 const get = require('lodash/object/get');
 

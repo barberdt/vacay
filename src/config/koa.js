@@ -1,6 +1,3 @@
-'use strict';
-
-const appConfig = require('./app');
 const bodyParser = require('koa-body');
 const validate = require('koa-validate');
 const redisStore = require('koa-redis');
@@ -8,6 +5,7 @@ const serve = require('koa-static');
 const session = require('koa-generic-session');
 const views = require('co-views');
 
+const appConfig = require('./app');
 
 /**
  * Config for the Koa app.

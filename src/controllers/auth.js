@@ -1,8 +1,5 @@
-'use strict';
-
 const mongoose = require('mongoose');
 const passport = require('koa-passport');
-
 
 const User = mongoose.model('User');
 

@@ -1,6 +1,3 @@
-'use strict';
-
-
 const normalizeUrl = '/css/normalize.css';
 const commonsScriptUrl = '/js/commons.js';
 

@@ -1,9 +1,6 @@
-'use strict';
-
 const authenticateUser = require('../utils/authenticateUser');
 const LocalStrategy = require('passport-local');
 const mongoose = require('mongoose');
-
 
 const User = mongoose.model('User');
 

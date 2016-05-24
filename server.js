@@ -1,12 +1,10 @@
-'use strict';
-
-const appConfig = require('./src/config/app');
 const fs = require('fs');
 const koa = require('koa');
-const koaConfig = require('./src/config/koa');
 const mongoose = require('mongoose');
 const passport = require('koa-passport');
 
+const appConfig = require('./src/config/app');
+const koaConfig = require('./src/config/koa');
 
 // Connect mongo
 mongoose.connect(appConfig.mongoUrl);
