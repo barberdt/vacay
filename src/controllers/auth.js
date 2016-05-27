@@ -10,7 +10,7 @@ module.exports = {
   /**
    * Log in.
    */
-  login: function *() {
+  login: function* login() {
     this.checkBody('email').notEmpty('Required');
     this.checkBody('password').notEmpty('Required');
     this.assert(!this.errors, 400, { fields: this.errors });
@@ -20,18 +20,18 @@ module.exports = {
     const existingUser = yield User.findOne({ email });
     this.assert(existingUser, 400, 'No account exists for that email address.');
 
-    const _this = this;
-    yield* passport.authenticate('local', function *(err, user) {
-      _this.assert(!err && user, 401, 'Invalid password.');
-      yield _this.login(user);
-      _this.body = user;
+    const self = this;
+    yield* passport.authenticate('local', function* completeLogin(err, user) {
+      self.assert(!err && user, 401, 'Invalid password.');
+      yield self.login(user);
+      self.body = user;
     }).call(this);
   },
 
   /**
    * Log out.
    */
-  logout: function *() {
+  logout: function* logout() {
     this.logout();
     this.session = null;
     this.status = 204;
@@ -40,7 +40,7 @@ module.exports = {
   /**
    * Sign up the requested new user and log them in.
    */
-  signup: function *() {
+  signup: function* signup() {
     this.checkBody('email').notEmpty('Required').isEmail('must be a valid email address');
     this.checkBody('first').notEmpty('Required');
     this.checkBody('last').notEmpty('Required');
@@ -58,5 +58,5 @@ module.exports = {
     newUser = yield newUser.save();
     yield this.login(newUser);
     this.body = newUser;
-  }
+  },
 };

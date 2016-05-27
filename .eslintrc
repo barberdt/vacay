@@ -1,3 +1,10 @@
 {
-  "extends": "barberdt"
+  "extends": "airbnb",
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "generator-star-spacing": ["error", "after"],
+    "import/no-unresolved": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id", "__v"] }],
+    "react/prop-types": ["error", { "ignore": ["children"] }]
+  }
 }

@@ -1,21 +1,17 @@
-import { fromJS, Map as IMap } from 'immutable';
+import { fromJS, Map as iMap } from 'immutable';
+import immutableStore from 'alt/utils/ImmutableUtil';
 
 import alt from 'dispatchers/alt';
-import immutableStore from 'alt/utils/ImmutableUtil';
 import TripActions from 'actions/TripActions';
-
 
 /**
  * A content store for trips.
  */
 class TripStore {
   constructor() {
-    this.state = IMap();
-
+    this.state = iMap();
     this.bindActions(TripActions);
-    this.exportPublicMethods({
-      fetch: this.fetch
-    });
+    this.exportPublicMethods({ fetch: this.fetch });
   }
 
   /**
@@ -24,7 +20,7 @@ class TripStore {
    * @param {Object} trip - The created trip.
    */
   onCreateSuccess(trip) {
-    this.setState(this.state.set(trip.id, IMap(trip)));
+    this.setState(this.state.set(trip.id, iMap(trip)));
   }
 
   /**
@@ -33,10 +29,11 @@ class TripStore {
    * @param {Array} trips - The loaded trips.
    */
   onLoadSuccess(trips) {
-    const tripMap = trips.reduce((current, trip) => {
-      current[trip.id] = trip;
-      return current;
-    }, {});
+    const tripMap = trips.reduce((current, trip) => (
+      Object.assign(current, {
+        [trip.id]: trip,
+      })
+    ), {});
 
     this.setState(fromJS(tripMap));
   }

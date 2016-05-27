@@ -1,10 +1,7 @@
-
-
 const get = require('lodash/object/get');
 
-
 // @TODO docs
-const getHidePathnames = (schema) => {
+const getHidePathnames = schema => {
   const pathnames = [];
 
   schema.eachPath((pathname, schemaType) => {
@@ -17,23 +14,23 @@ const getHidePathnames = (schema) => {
 };
 
 // @TODO docs
-const transformId = (ret) => {
+const transformId = ret => {
   if (!ret.id && ret._id) {
-    ret.id = ret._id;
+    ret.id = ret._id; // eslint-disable-line no-param-reassign
   }
 
-  delete ret._id;
+  delete ret._id; // eslint-disable-line no-param-reassign
 };
 
 // @TODO docs
 const hideFields = (ret, hidePathnames) => {
-  hidePathnames.forEach((pathname) => {
+  hidePathnames.forEach(pathname => {
     const split = pathname.split('.');
     const propName = split[split.length - 1];
     const pathParts = split.slice(0, split.length - 1);
 
     if (ret.hasOwnProperty(propName)) {
-      delete ret[propName];
+      delete ret[propName]; // eslint-disable-line no-param-reassign
     } else {
       const nested = get(ret, pathParts);
 
@@ -49,7 +46,7 @@ const hideFields = (ret, hidePathnames) => {
  *
  * @param {Object} schema - The schema to alter the JSON transform for.
  */
-module.exports = (schema) => {
+module.exports = schema => {
   const options = schema.options;
   const existingOption = options.toJSON;
   const existingTransform = existingOption ? existingOption.transform : null;
@@ -61,7 +58,7 @@ module.exports = (schema) => {
       existingTransform(doc, ret, transformOptions);
     }
 
-    delete ret.__v;
+    delete ret.__v; // eslint-disable-line no-param-reassign
     transformId(ret);
     hideFields(ret, hidePathnames);
   };

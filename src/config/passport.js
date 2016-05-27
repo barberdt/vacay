@@ -20,8 +20,8 @@ const serializeUser = (user, done) => done(null, user._id);
  */
 const deserializeUser = (id, done) => {
   User.findById(id)
-    .then((user) => done(null, user))
-    .catch((error) => done(error, null));
+    .then(user => done(null, user))
+    .catch(error => done(error, null));
 };
 
 /**
@@ -29,7 +29,7 @@ const deserializeUser = (id, done) => {
  *
  * @param {Object} passport - The passport instance to configure.
  */
-module.exports = (passport) => {
+module.exports = passport => {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));

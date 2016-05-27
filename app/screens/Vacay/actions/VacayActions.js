@@ -3,7 +3,6 @@ import { post } from 'axios';
 import alt from 'dispatchers/alt';
 import TripStore from 'stores/TripStore';
 
-
 /**
  * Actions specific to the App component.
  */
@@ -25,7 +24,7 @@ class VacayActions {
   // @TODO docs
   logout() {
     post('/auth/logout')
-      .then(() => location.href = '/login');
+      .then(() => { location.href = '/login'; });
   }
 }
 

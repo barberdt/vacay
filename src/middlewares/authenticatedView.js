@@ -1,5 +1,5 @@
 // @TODO docs
-module.exports = function *(next) {
+module.exports = function* authenticatedView(next) {
   if (this.isAuthenticated()) {
     yield next;
   } else {

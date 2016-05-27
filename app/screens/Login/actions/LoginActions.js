@@ -1,7 +1,5 @@
 import alt from 'dispatchers/alt';
-
 import { login } from '../utils/loginAPI';
-
 
 /**
  * Login actions.
@@ -20,8 +18,8 @@ class LoginActions {
   login(email, password) {
     this.dispatch();
     login(email, password)
-      .then(() => location.href = '/')
-      .catch((resp) => {
+      .then(() => { location.href = '/'; })
+      .catch(resp => {
         const { message: error, fields: fieldErrors } = resp.data;
         this.actions.loginFailure({ error, fieldErrors });
       });

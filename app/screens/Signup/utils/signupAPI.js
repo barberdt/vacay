@@ -1,6 +1,5 @@
 import { post } from 'axios';
 
-
 const ROOT_PATH = '/auth/signup';
 
 /**

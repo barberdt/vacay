@@ -1,10 +1,8 @@
-import React from 'react/addons';
-
+import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
+
 import SignupStore from './stores/SignupStore';
-
 import Signup from './Signup';
-
 
 const ConnectedSignup = connectToStores({
   getStores() {
@@ -14,7 +12,7 @@ const ConnectedSignup = connectToStores({
   getPropsFromStores() {
     const { error, fields } = SignupStore.getState().toObject();
     return { error, fields };
-  }
+  },
 }, Signup);
 
 /**

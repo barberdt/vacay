@@ -1,16 +1,13 @@
-import { Map as IMap } from 'immutable';
-import React from 'react/addons';
+import { Map as iMap } from 'immutable';
+import React from 'react';
 import { Link, RouteHandler } from 'react-router';
 
 import TripActions from 'actions/TripActions';
 
-
-export default React.createClass({
+export default class extends React.Component {
   handleClick() {
-    TripActions.create(IMap({
-      name: 'Foobar'
-    }));
-  },
+    TripActions.create(iMap({ name: 'Foobar' }));
+  }
 
   render() {
     return (
@@ -21,4 +18,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

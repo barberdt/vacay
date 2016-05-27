@@ -9,10 +9,10 @@ export default {
     border: '1px solid #ccc',
     marginBottom: 15,
     ':focus': {
-      outline: 'none'
-    }
+      outline: 'none',
+    },
   },
   error: {
-    border: '1px solid #da6666'
-  }
+    border: '1px solid #da6666',
+  },
 };

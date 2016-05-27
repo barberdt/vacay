@@ -9,6 +9,6 @@ export default {
   color: '#fff',
   border: 'none',
   ':focus': {
-    outline: 'none'
-  }
+    outline: 'none',
+  },
 };

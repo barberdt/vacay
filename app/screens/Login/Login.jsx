@@ -1,13 +1,21 @@
-import { Map as IMap } from 'immutable';
-import Radium from 'radium';
-import React, { PropTypes } from 'react/addons';
+import { Map as iMap } from 'immutable';
+import radium from 'radium';
+import React, { PropTypes } from 'react';
 
 import LoginActions from './actions/LoginActions';
-
 import Input from 'components/formFields/Input';
-
 import style from './LoginStyle';
 
+const propTypes = {
+  /**
+   * The overall error for the form.
+   */
+  error: PropTypes.string,
+  /**
+   * The field data, including each field's value and potential error.
+   */
+  fields: PropTypes.instanceOf(iMap),
+};
 
 /**
  * The login component.
@@ -16,6 +24,17 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: null, password: null };
+    this.login = this.login.bind(this);
+  }
+
+  /**
+   * Handler for changes to the form fields.
+   *
+   * @param {Event} e - The event emitted by the change.
+   */
+  onChange(e) {
+    const { name, value } = e.target;
+    LoginActions.updateField({ name, value });
   }
 
   /**
@@ -29,16 +48,6 @@ class Login extends React.Component {
     LoginActions.login(email.get('value'), password.get('value'));
   }
 
-  /**
-   * Handler for changes to the form fields.
-   *
-   * @param {Event} e - The event emitted by the change.
-   */
-  onChange(e) {
-    const { name, value } = e.target;
-    LoginActions.updateField({ name, value });
-  }
-
   render() {
     const { error, fields } = this.props;
     const { email, password } = fields.toObject();
@@ -48,7 +57,7 @@ class Login extends React.Component {
       <div style={style.container}>
         <div style={style.formContainer}>
           {error && <div>{error}</div>}
-          <form role="form" onSubmit={this.login.bind(this)}>
+          <form role="form" onSubmit={this.login(this)}>
             <Input
               placeholder="Email"
               autoComplete="email"
@@ -74,15 +83,6 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
-  /**
-   * The overall error for the form.
-   */
-  error: PropTypes.string,
-  /**
-   * The field data, including each field's value and potential error.
-   */
-  fields: PropTypes.instanceOf(IMap)
-};
+Login.propTypes = propTypes;
 
-export default Radium(Login);
+export default radium(Login);

@@ -1,7 +1,5 @@
 import alt from 'dispatchers/alt';
-
 import { signup } from '../utils/signupAPI';
-
 
 /**
  * Signup actions.
@@ -23,8 +21,8 @@ class SignupActions {
   signup(user) {
     this.dispatch();
     signup(user)
-      .then(() => location.href = '/')
-      .catch((resp) => {
+      .then(() => { location.href = '/'; })
+      .catch(resp => {
         const { message: error, fields: fieldErrors } = resp.data;
         this.actions.signupFailure({ error, fieldErrors });
       });

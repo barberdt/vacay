@@ -1,14 +1,17 @@
 import alt from 'dispatchers/alt';
 import { create, load } from 'utils/tripAPI';
 
-
 /**
  * Actions related to trips.
  */
 class TripActions {
   constructor() {
-    this.generateActions('createSuccess', 'createFailure', 'loadSuccess',
-        'loadFailure');
+    this.generateActions(
+      'createSuccess',
+      'createFailure',
+      'loadSuccess',
+      'loadFailure'
+    );
   }
 
   /**
@@ -20,12 +23,12 @@ class TripActions {
     this.dispatch();
 
     create(trip)
-      .then((resp) => {
+      .then(resp => {
         const { data } = resp;
         this.actions.createSuccess(data);
         return Promise.resolve(data);
       })
-      .catch((resp) => {
+      .catch(resp => {
         const { message } = resp;
         this.actions.createFailure(message);
         return Promise.reject(message);
@@ -41,12 +44,12 @@ class TripActions {
     this.dispatch();
 
     return load()
-      .then((resp) => {
+      .then(resp => {
         const { trips } = resp.data;
         this.actions.loadSuccess(trips);
         return Promise.resolve(trips);
       })
-      .catch((resp) => {
+      .catch(resp => {
         const { message } = resp;
         this.actions.loadFailure(message);
         return Promise.reject(message);

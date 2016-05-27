@@ -1,5 +1,5 @@
 // @TODO docs
-module.exports = function *(next) {
+module.exports = function* authenticated(next) {
   this.assert(this.isAuthenticated(), 401, 'Requires authentication.');
   yield next;
 };

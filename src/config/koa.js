@@ -14,11 +14,8 @@ const appConfig = require('./app');
  * @param {Object} passport - The configured passport instance.
  */
 module.exports = (app, passport) => {
-  app.name = appConfig.name;
-  app.keys = appConfig.keys;
-
   // Error handling
-  app.use(function *(next) {
+  app.use(function* handleErrors(next) {
     try {
       yield next;
     } catch (error) {
@@ -28,9 +25,9 @@ module.exports = (app, passport) => {
 
       if (error.fields) {
         // Properly format field errors generator by koa-validate.
-        const fields = error.fields.reduce((current, field) => {
-          return Object.assign(current, field);
-        }, {});
+        const fields = error.fields.reduce((current, field) => (
+          Object.assign(current, field)
+        ), {});
 
         body.fields = fields;
       }
@@ -56,10 +53,10 @@ module.exports = (app, passport) => {
   app.use(passport.session());
 
   // View rendering
-  app.use(function *(next) {
+  app.use(function* renderViews(next) {
     this.render = views(`${appConfig.root}/src/views`, {
       map: { html: 'swig' },
-      cache: 'memory'
+      cache: 'memory',
     });
     yield next;
   });

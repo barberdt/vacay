@@ -1,9 +1,8 @@
 import { fromJS } from 'immutable';
+import immutableStore from 'alt/utils/ImmutableUtil';
 
 import alt from 'dispatchers/alt';
-import immutableStore from 'alt/utils/ImmutableUtil';
 import SignupActions from '../actions/SignupActions';
-
 
 /**
  * The store for the Signup view.
@@ -16,8 +15,8 @@ class SignupStore {
         email: {},
         first: {},
         last: {},
-        password: {}
-      }
+        password: {},
+      },
     });
 
     this.bindActions(SignupActions);
@@ -41,11 +40,11 @@ class SignupStore {
    */
   onSignup() {
     let fields = this.state.get('fields');
-    fields = fields.map((field) => field.set('error', null));
+    fields = fields.map(field => field.set('error', null));
 
     this.setState(this.state.merge({
       error: null,
-      fields: fields
+      fields,
     }));
   }
 

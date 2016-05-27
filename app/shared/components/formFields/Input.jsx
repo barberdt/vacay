@@ -1,32 +1,10 @@
-import Radium from 'radium';
-import React, { PropTypes } from 'react/addons';
+import radium from 'radium';
+import React, { PropTypes } from 'react';
 
 import FormField from './FormField';
-
 import style from './InputStyle';
 
-
-/**
- * The form field for text inputs.
- */
-class Input extends React.Component {
-  render() {
-    const { name, error, ...props } = this.props;
-    const styles = [style.base];
-
-    if (error) {
-      styles.push(style.error);
-    }
-
-    return (
-      <FormField name={name} error={error}>
-        <input {...props} name={name} style={styles} />
-      </FormField>
-    );
-  }
-}
-
-Input.propTypes = {
+const propTypes = {
   /**
    * The error message for the field.
    */
@@ -38,11 +16,32 @@ Input.propTypes = {
   /**
    * The change callback.
    */
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
-Input.defaultProps = {
-  type: 'text'
+const defaultProps = {
+  type: 'text',
 };
 
-export default Radium(Input);
+/**
+ * The form field for text inputs.
+ */
+function Input(props) {
+  const { name, error } = props;
+  const styles = [style.base];
+
+  if (error) {
+    styles.push(style.error);
+  }
+
+  return (
+    <FormField name={name} error={error}>
+      <input {...props} name={name} style={styles} />
+    </FormField>
+  );
+}
+
+Input.propTypes = propTypes;
+Input.defaultProps = defaultProps;
+
+export default radium(Input);

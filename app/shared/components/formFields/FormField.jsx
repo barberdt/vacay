@@ -1,7 +1,17 @@
-import React, { PropTypes } from 'react/addons';
+import React, { PropTypes } from 'react';
 
 import style from './FormFieldStyle';
 
+const propTypes = {
+  /**
+   * The error message for the field.
+   */
+  error: PropTypes.string,
+  /**
+   * The name of the field.
+   */
+  name: PropTypes.string.isRequired,
+};
 
 /**
  * The base wrapper for form fields.
@@ -24,13 +34,4 @@ export default class FormField extends React.Component {
   }
 }
 
-FormField.propTypes = {
-  /**
-   * The error message for the field.
-   */
-  error: PropTypes.string,
-  /**
-   * The name of the field.
-   */
-  name: PropTypes.string.isRequired
-};
+FormField.propTypes = propTypes;

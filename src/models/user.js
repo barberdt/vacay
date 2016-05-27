@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const createSchema = require('../utils/createSchema');
 
+// eslint-disable-next-line max-len
 const emailRe = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
 /**
@@ -15,11 +16,11 @@ const UserSchema = createSchema({
     required: true,
     unique: true,
     match: emailRe,
-    lowercase: true
+    lowercase: true,
   },
   first: { type: String, required: true, maxlength: 35 },
   last: { type: String, required: true, maxlength: 35 },
-  password: { type: String, required: true, hideJSON: true }
+  password: { type: String, required: true, hideJSON: true },
 });
 
 /**
@@ -27,7 +28,7 @@ const UserSchema = createSchema({
  *
  * @param {Function} done - The function to call when the hook is complete.
  */
-UserSchema.pre('save', function(done) {
+UserSchema.pre('save', function preSave(done) {
   try {
     if (!this.isModified('password')) {
       done();
@@ -36,7 +37,7 @@ UserSchema.pre('save', function(done) {
 
     co.wrap(this.encryptPassword).call(this)
       .then(() => done())
-      .catch((error) => done(error));
+      .catch(error => done(error));
   } catch (error) {
     done(error);
   }
@@ -45,7 +46,7 @@ UserSchema.pre('save', function(done) {
 /**
  * Encrypt the user instance's password.
  */
-UserSchema.methods.encryptPassword = function *() {
+UserSchema.methods.encryptPassword = function* encryptPassword() {
   const salt = yield bcrypt.genSalt();
   const hash = yield bcrypt.hash(this.password, salt);
   this.password = hash;
@@ -58,7 +59,7 @@ UserSchema.methods.encryptPassword = function *() {
  * @param {String} candidatePassword - The password to match against.
  * @return {Boolean} Whether or not the password matches.
  */
-UserSchema.methods.passwordMatches = function *(candidatePassword) {
+UserSchema.methods.passwordMatches = function* passwordMatches(candidatePassword) {
   return yield bcrypt.compare(candidatePassword, this.password);
 };
 
@@ -69,7 +70,7 @@ UserSchema.methods.passwordMatches = function *(candidatePassword) {
  * @param {String} password - The candidate password to verify.
  * @return {Object} The matching user, if the password was verified.
  */
-UserSchema.statics.verifyPassword = function *(email, password) {
+UserSchema.statics.verifyPassword = function* verifyPassword(email, password) {
   const user = yield this.findOne({ email });
 
   if (!user) {

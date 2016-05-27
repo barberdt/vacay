@@ -1,8 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
 
-
-export default React.createClass({
-  render() {
-    return <div>This is another test.</div>;
-  }
-});
+export default function () {
+  return <div>This is another test.</div>;
+}

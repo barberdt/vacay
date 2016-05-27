@@ -10,16 +10,18 @@ const koaConfig = require('./src/config/koa');
 mongoose.connect(appConfig.mongoUrl);
 
 // Load models
-const modelsPath = appConfig.root + '/src/models';
+const modelsPath = `${appConfig.root}/src/models`;
 
-fs.readdirSync(modelsPath).forEach((file) => {
-  if (file.includes('js')) {
-    require(`${modelsPath}/${file}`);
+fs.readdirSync(modelsPath).forEach(file => {
+  if (file.includes('.js')) {
+    require(`${modelsPath}/${file}`); // eslint-disable-line global-require
   }
 });
 
 // Create koa app instance
 const app = koa();
+app.name = appConfig.name;
+app.keys = appConfig.keys;
 
 // Configure passport
 // Require must happens after models have been loaded

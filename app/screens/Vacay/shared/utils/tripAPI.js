@@ -1,6 +1,5 @@
 import { post, get } from 'axios';
 
-
 const ROOT_PATH = '/api/trips';
 
 /**

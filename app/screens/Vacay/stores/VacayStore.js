@@ -1,25 +1,24 @@
-import { Map as IMap } from 'immutable';
+import { Map as iMap } from 'immutable';
+import immutableStore from 'alt/utils/ImmutableUtil';
 
 import alt from 'dispatchers/alt';
-import immutableStore from 'alt/utils/ImmutableUtil';
 import VacayActions from '../actions/VacayActions';
 import TripActions from 'actions/TripActions';
 import TripStore from 'stores/TripStore';
-
 
 /**
  * Store specific to the App component.
  */
 class VacayStore {
   constructor() {
-    this.state = IMap({
+    this.state = iMap({
       isLoading: false,
-      trips: null
+      trips: null,
     });
 
     this.bindActions(VacayActions);
     this.bindListeners({
-      onCreateTripSuccess: TripActions.createSuccess
+      onCreateTripSuccess: TripActions.createSuccess,
     });
   }
 
@@ -27,9 +26,9 @@ class VacayStore {
    * Handler for VacayActions.reset. Set the store to an empty and loading state.
    */
   onReset() {
-    this.setState(IMap({
+    this.setState(iMap({
       isLoading: true,
-      trips: null
+      trips: null,
     }));
   }
 
@@ -40,7 +39,7 @@ class VacayStore {
   onResetSuccess() {
     this.setState(this.state.merge({
       isLoading: false,
-      trips: TripStore.getState()
+      trips: TripStore.getState(),
     }));
   }
 
@@ -49,7 +48,7 @@ class VacayStore {
    */
   onResetFailure() {
     this.setState(this.state.merge({
-      isLoading: false
+      isLoading: false,
     }));
   }
 
@@ -59,7 +58,7 @@ class VacayStore {
   onCreateTripSuccess() {
     this.waitFor(TripStore.dispatchToken);
     this.setState(this.state.merge({
-      trips: TripStore.getState()
+      trips: TripStore.getState(),
     }));
   }
 }

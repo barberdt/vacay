@@ -1,13 +1,21 @@
-import { Map as IMap } from 'immutable';
-import Radium from 'radium';
-import React, { PropTypes } from 'react/addons';
+import { Map as iMap } from 'immutable';
+import radium from 'radium';
+import React, { PropTypes } from 'react';
 
 import SignupActions from './actions/SignupActions';
-
 import Input from 'components/formFields/Input';
-
 import style from './SignupStyle';
 
+const propTypes = {
+  /**
+   * The overall error for the form.
+   */
+  error: PropTypes.string,
+  /**
+   * The field data, including each field's value and potential error.
+   */
+  fields: PropTypes.instanceOf(iMap),
+};
 
 /**
  * The signup component.
@@ -15,7 +23,23 @@ import style from './SignupStyle';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: null, first: null, last: null, password: null };
+    this.state = {
+      email: null,
+      first: null,
+      last: null,
+      password: null,
+    };
+    this.signup = this.signup.bind(this);
+  }
+
+  /**
+   * Set state with the changed field's new value.
+   *
+   * @param {Object} e - The event emitted by the changed field.
+   */
+  onChange(e) {
+    const { name, value } = e.target;
+    SignupActions.updateField({ name, value });
   }
 
   /**
@@ -30,18 +54,8 @@ class Signup extends React.Component {
       email: email.get('value'),
       first: first.get('value'),
       last: last.get('value'),
-      password: password.get('value')
+      password: password.get('value'),
     });
-  }
-
-  /**
-   * Set state with the changed field's new value.
-   *
-   * @param {Object} e - The event emitted by the changed field.
-   */
-  onChange(e) {
-    const { name, value } = e.target;
-    SignupActions.updateField({ name, value });
   }
 
   render() {
@@ -53,7 +67,7 @@ class Signup extends React.Component {
       <div style={style.container}>
         <div style={style.formContainer}>
           {error && <div>{error}</div>}
-          <form role="form" onSubmit={this.signup.bind(this)}>
+          <form role="form" onSubmit={this.signup(this)}>
             <Input
               placeholder="Email"
               autoComplete="email"
@@ -95,15 +109,6 @@ class Signup extends React.Component {
   }
 }
 
-Signup.propTypes = {
-  /**
-   * The overall error for the form.
-   */
-  error: PropTypes.string,
-  /**
-   * The field data, including each field's value and potential error.
-   */
-  fields: PropTypes.instanceOf(IMap)
-};
+Signup.propTypes = propTypes;
 
-export default Radium(Signup);
+export default radium(Signup);

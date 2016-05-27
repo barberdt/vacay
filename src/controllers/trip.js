@@ -9,7 +9,7 @@ module.exports = {
   /**
    * Create a new trip with the given request body.
    */
-  createOne: function *() {
+  createOne: function* createOne() {
     let newTrip = new Trip(this.request.body);
     newTrip = yield newTrip.save();
 
@@ -19,7 +19,7 @@ module.exports = {
   /**
    * Get all trips.
    */
-  getAll: function *() {
+  getAll: function* getAll() {
     const trips = yield Trip.find();
     this.body = { trips };
   },
@@ -27,10 +27,10 @@ module.exports = {
   /**
    * Get a single trip by id.
    */
-  getOne: function *() {
+  getOne: function* getOne() {
     const id = this.params.id;
     const trip = yield Trip.findById(id);
     this.assert(trip, 404, `Could not find trip with id ${id}.`);
     this.body = trip;
-  }
+  },
 };

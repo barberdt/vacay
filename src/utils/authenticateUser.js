@@ -1,8 +1,5 @@
-
-
 const co = require('co');
 const mongoose = require('mongoose');
-
 
 const User = mongoose.model('User');
 
@@ -15,11 +12,11 @@ const User = mongoose.model('User');
  * @param {Function} done - The function to call after completing authentication.
  */
 module.exports = (email, password, done) => {
-  const verifyPassword = function *() {
+  const verifyPassword = function* verifyPassword() {
     return yield User.verifyPassword(email, password);
   };
 
   co(verifyPassword)
-    .then((user) => done(null, user))
-    .catch((error) => done(error, null));
+    .then(user => done(null, user))
+    .catch(error => done(error, null));
 };

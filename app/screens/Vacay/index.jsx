@@ -1,14 +1,12 @@
-import React from 'react/addons';
+import React from 'react';
 import { Route, run, HistoryLocation } from 'react-router';
-
 import connectToStores from 'alt/utils/connectToStores';
+
 import VacayActions from './actions/VacayActions';
 import VacayStore from './stores/VacayStore';
-
 import Vacay from './Vacay';
 import OtherTest from './screens/OtherTest';
 import Test from './screens/Test';
-
 
 /**
  * The Vacay screen connected to stores.
@@ -23,13 +21,13 @@ const ConnectedVacay = connectToStores({
 
     return {
       isLoading: isLoading || !trips,
-      trips
+      trips,
     };
   },
 
   componentDidConnect() {
     VacayActions.reset();
-  }
+  },
 }, Vacay);
 
 /**
@@ -47,7 +45,7 @@ const routes = (
  * Init react router after DOM has loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  run(routes, HistoryLocation, (Root) => {
+  run(routes, HistoryLocation, Root => {
     React.render(<Root />, document.body);
   });
 });
